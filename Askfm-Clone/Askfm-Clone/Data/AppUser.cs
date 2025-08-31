@@ -15,13 +15,13 @@ namespace Askfm_Clone.Data
             - CreatedAt
          */
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//auto-generated
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public bool AllowAnonymous { get; set; }
-        public int Coins { get; set; }
+        public bool AllowAnonymous { get; set; } = true; // AllowAnonymousQuestions and AllowAnonymousComments
+        public int Coins { get; set; } = 0;
         public List<Question> QuestionsSent { get; set; }     // As sender
         public List<Question> QuestionsReceived { get; set; } // As receiver
         public List<Answer> Answers { get; set; }

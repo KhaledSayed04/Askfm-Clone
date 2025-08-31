@@ -1,5 +1,8 @@
 using Askfm_Clone.Data;
+using Askfm_Clone.Repositories.Contracs;
+using Askfm_Clone.Repositories.Implementation;
 using Microsoft.EntityFrameworkCore;
+using Askfm_Clone.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,11 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("Server = .\\SQLEXPRESS; Database = Askfm; Integrated Security = SSPI; TrustServerCertificate = True;"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Dependency Injection for Repositories
+builder.Services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
 
 var app = builder.Build();
 

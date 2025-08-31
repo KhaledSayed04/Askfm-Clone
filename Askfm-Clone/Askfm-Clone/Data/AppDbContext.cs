@@ -16,6 +16,7 @@ namespace Askfm_Clone.Data
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Block> Blocks { get; set; }
         public DbSet<CoinsTransaction> CoinsTransactions { get; set; }
+        public DbSet<RefreshTokenInfo> RefreshTokenInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
