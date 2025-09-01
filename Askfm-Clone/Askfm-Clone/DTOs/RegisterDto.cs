@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Base_Library.DTOs
 {
-    public class Register: AccountBase
+    public class RegisterDto: AccountBaseDto
     {
         [Required]
         [MinLength(8)]

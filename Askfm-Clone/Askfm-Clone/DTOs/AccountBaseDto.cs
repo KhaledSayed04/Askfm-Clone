@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Base_Library.DTOs
 {
-    public class AccountBase
+    public class AccountBaseDto
     {
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Email is required.")]

@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base_Library.DTOs
 {
-    public class RefreshToken
+    public class LoginDto: AccountBaseDto
     {
-        public string ?Token { get; set; }
-    
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Askfm_Clone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250831132908_Add_Refresh_Table")]
-    partial class Add_Refresh_Table
+    [Migration("20250901201359_AddRefreshTokenToUser")]
+    partial class AddRefreshTokenToUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,6 +84,13 @@ namespace Askfm_Clone.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RefreshTokenHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -269,6 +276,8 @@ namespace Askfm_Clone.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("RefreshTokenInfos");
                 });
 
@@ -395,6 +404,17 @@ namespace Askfm_Clone.Migrations
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("Askfm_Clone.Data.RefreshTokenInfo", b =>
+                {
+                    b.HasOne("Askfm_Clone.Data.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Askfm_Clone.Data.Answer", b =>

@@ -1,11 +1,14 @@
 ﻿using Askfm_Clone.Data;
+using Askfm_Clone.DTOs;
 using Askfm_Clone.Helpers;
 using Askfm_Clone.Repositories.Contracs;
 using Base_Library.DTOs;
-using Base_Library.Responses;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Win32;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -13,129 +16,117 @@ using System.Text;
 
 namespace Askfm_Clone.Repositories.Implementation
 {
-    public class UserAccountRepository(IOptions<JwtSection> config, AppDbContext appDpContext) : IUserAccountRepository
+    public class UserAccountRepository : IUserAccountRepository
     {
-        public async Task<GeneralResponse> RegisterAsync(Register user)
-        {
-            if (user is null)
-            {
-                return new GeneralResponse(false, "User cannot be empty.");
-            }
-            if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
-            {
-                return new GeneralResponse(false, "All fields are required.");
-            }
-            var emailExists = await FindUserByEmail(user.Email);
-            if (emailExists != null)
-            {
-                return new GeneralResponse(false, "User already exists.");
-            }
+        private readonly AppDbContext _context;
+        private readonly IOptions<JwtSection> _config;
 
-            var appicationUser = await AddToDatabase(new AppUser
+        public UserAccountRepository(IOptions<JwtSection> config, AppDbContext context)
+        {
+            _config = config;
+            _context = context;
+        }
+
+        public async Task<AuthResultDto> RegisterAsync(RegisterDto user)
+        {
+            var emailExists = await _context.Users.AnyAsync(u => u.Email.ToLower() == user.Email.ToLower());
+            if (emailExists)
+                return AuthResultDto.Fail("User already exists");
+
+            var newUser = new AppUser
             {
                 Name = user.Name,
                 Email = user.Email.ToLower(),
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password)
-            });
-            return new GeneralResponse(true, "User created successfully.");
-
-        }
-        public async Task<LoginReponse> SignInAsync(Login user)
-        {
-            if (user is null)
-            {
-                return new LoginReponse(false, "User cannot be empty.");
-            }
-            if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
-            {
-                return new LoginReponse(false, "All fields are required.");
-            }
-            var userExists = await FindUserByEmail(user.Email);
-            if (userExists is null)
-            {
-                return new LoginReponse(false, "User does not exist.");
-            }
-            if (!BCrypt.Net.BCrypt.Verify(user.Password, userExists.PasswordHash!))
-            {
-                return new LoginReponse(false, "Invalid Email or Password.");
-            }
-            
-            var token = GenerateJwtToken(userExists);
-            var refreshToken = GenerateRefreshToken();
-            //save the refresh token to the database
-            var findUser = await appDpContext.RefreshTokenInfos.FirstOrDefaultAsync(u => u.UserId == userExists.Id);
-            if (findUser is not null)
-            {
-                findUser.Token = refreshToken;
-                await appDpContext.SaveChangesAsync();
-            }
-            else
-            {
-                await AddToDatabase(new RefreshTokenInfo()
-                {
-                    Token = refreshToken,
-                    UserId = userExists.Id
-                });
-            }
-            return new LoginReponse(true, "Login successful.", token, refreshToken);
-
-        }
-        private string GenerateRefreshToken() => Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
-
-        public async Task<LoginReponse> RefreshTokenAsync(RefreshToken refreshToken)
-        {
-            if (refreshToken is null || string.IsNullOrEmpty(refreshToken.Token))
-            {
-                return new LoginReponse(false, "Refresh token cannot be empty.");
-            }
-            var findToken = appDpContext.RefreshTokenInfos.FirstOrDefault(rt => rt.Token!.Equals(refreshToken.Token));
-            if (findToken is null)
-            {
-                return new LoginReponse(false, "Refresh token does not exist.");
-            }
-
-            //get user details
-            var user = appDpContext.Users.FirstOrDefault(u => u.Id == findToken.UserId);
-            if (user is null)
-            {
-                return new LoginReponse(false, "User does not exist.");
-            }
-           
-            //generate new token and refresh token
-            var token = GenerateJwtToken(user);
-            var newRefreshToken = GenerateRefreshToken();
-            //update the refresh token in the database
-
-            var updateRefreshToken = await appDpContext.RefreshTokenInfos.FirstOrDefaultAsync(u => u.UserId == user.Id);
-            if (updateRefreshToken is null)
-            {
-                return new LoginReponse(false, "Refresh token does not exist for this user.");
-            }
-            updateRefreshToken.Token = newRefreshToken;
-            await appDpContext.SaveChangesAsync();
-            return new LoginReponse(true, "Token refreshed successfully.", token, newRefreshToken);
-
-        }
-        private string GenerateJwtToken(AppUser userExists)
-        {
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Value.Key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var userClaims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, userExists.Id.ToString()),
-                new Claim(ClaimTypes.Name, userExists.Name!),
-                new Claim(ClaimTypes.Email, userExists.Email!),
             };
+
+            await AddToDatabase(newUser);
+
+            return AuthResultDto.Success("User registered successfully");
+        }
+
+        public async Task<AuthResultDto> LoginAsync(LoginDto login)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email.ToLower());
+            if (user == null || !BCrypt.Net.BCrypt.Verify(login.Password, user.PasswordHash))
+                return AuthResultDto.Fail("Invalid email or password");
+
+            var accessToken = GenerateJwtToken(user);
+            var refreshToken = GenerateRefreshToken();
+
+            user.RefreshTokenHash = HashToken(refreshToken);
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays);
+
+            await _context.SaveChangesAsync();
+
+            return AuthResultDto.Success("Login successful", new TokenResponseDto
+            {
+                AccessToken=  accessToken,
+                RefreshToken =  refreshToken
+            });
+        }
+
+        public async Task<AuthResultDto> RefreshTokenAsync(string refreshToken)
+        {
+            if (string.IsNullOrEmpty(refreshToken))
+                return AuthResultDto.Fail("Refresh token cannot be empty");
+            var hashToken = HashToken(refreshToken);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.RefreshTokenHash == hashToken);
+            if (user == null)
+                return AuthResultDto.Fail("Invalid refresh token");
+
+            if (user.RefreshTokenExpiryTime < DateTime.UtcNow)
+                return AuthResultDto.Fail("Refresh token expired");
+
+            var newAccessToken = GenerateJwtToken(user);
+            var newRefreshToken = GenerateRefreshToken();
+
+            user.RefreshTokenHash = HashToken(newRefreshToken);
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays);// 7
+
+            await _context.SaveChangesAsync();
+
+            return AuthResultDto.Success("Token refreshed successfully", new TokenResponseDto
+            {
+                AccessToken=  newAccessToken,
+                RefreshToken =  newRefreshToken
+            });
+        }
+
+        private string GenerateJwtToken(AppUser user)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.Value.Key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+
             var token = new JwtSecurityToken(
-                issuer: config.Value.Issuer,
-                audience: config.Value.Audience,
-                claims: userClaims,
-                expires: DateTime.Now.AddDays(1),
+                issuer: _config.Value.Issuer,
+                audience: _config.Value.Audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(_config.Value.AccessTokenLifetimeMinutes),
                 signingCredentials: credentials
             );
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        private string GenerateRefreshToken() => Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+
+        private string HashToken(string token)
+        {
+            using var sha256 = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(token);
+            var hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
+
         private async Task<T> AddToDatabase<T>(T model)
         {
 
@@ -143,19 +134,10 @@ namespace Askfm_Clone.Repositories.Implementation
             {
                 throw new ArgumentNullException(nameof(model), "Model cannot be null.");
             }
-            var result = await appDpContext.AddAsync(model!);
+            var result = await _context.AddAsync(model!);
 
-            await appDpContext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return (T)result.Entity;
         }
-
-
-        private async Task<AppUser> FindUserByEmail(string email)
-        {
-
-            return await appDpContext.Users.FirstOrDefaultAsync(u => u.Email.ToLower().Equals(email.ToLower()));
-
-        }
-
     }
 }

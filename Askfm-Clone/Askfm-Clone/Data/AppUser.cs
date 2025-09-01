@@ -20,8 +20,11 @@ namespace Askfm_Clone.Data
         public string Name { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
+        public string RefreshTokenHash { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
         public bool AllowAnonymous { get; set; } = true; // AllowAnonymousQuestions and AllowAnonymousComments
         public int Coins { get; set; } = 0;
+
         public List<Question> QuestionsSent { get; set; }     // As sender
         public List<Question> QuestionsReceived { get; set; } // As receiver
         public List<Answer> Answers { get; set; }
