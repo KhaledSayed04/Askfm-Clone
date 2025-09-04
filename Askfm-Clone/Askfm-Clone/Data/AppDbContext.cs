@@ -191,6 +191,16 @@ namespace Askfm_Clone.Data
                       .HasForeignKey(b => b.BlockedId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
+            // --------------------
+            // Refresh Token
+            // --------------------
+            modelBuilder.Entity<RefreshTokenInfo>()
+          .HasOne(rt => rt.User)
+          .WithMany(u => u.RefreshTokens)
+          .HasForeignKey(rt => rt.UserId)
+          .OnDelete(DeleteBehavior.Cascade);
+        
+
         }
     }
 }

@@ -3,16 +3,14 @@ using Askfm_Clone.DTOs;
 using Askfm_Clone.Helpers;
 using Askfm_Clone.Repositories.Contracs;
 using Base_Library.DTOs;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Win32;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using UAParser;
 
 namespace Askfm_Clone.Repositories.Implementation
 {
@@ -29,14 +27,14 @@ namespace Askfm_Clone.Repositories.Implementation
 
         public async Task<AuthResultDto> RegisterAsync(RegisterDto user)
         {
-            var emailExists = await _context.Users.AnyAsync(u => u.Email.ToLower() == user.Email.ToLower());
+            var emailExists = await _context.Users.AnyAsync(u => u.Email.ToLower() == user.Email!.ToLower());
             if (emailExists)
                 return AuthResultDto.Fail("User already exists");
 
             var newUser = new AppUser
             {
-                Name = user.Name,
-                Email = user.Email.ToLower(),
+                Name = user.Name!,
+                Email = user.Email!.ToLower(),
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password)
             };
 
@@ -47,22 +45,48 @@ namespace Askfm_Clone.Repositories.Implementation
 
         public async Task<AuthResultDto> LoginAsync(LoginDto login)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email.ToLower());
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email!.ToLower());
             if (user == null || !BCrypt.Net.BCrypt.Verify(login.Password, user.PasswordHash))
                 return AuthResultDto.Fail("Invalid email or password");
 
             var accessToken = GenerateJwtToken(user);
             var refreshToken = GenerateRefreshToken();
+            var refreshTokenHash = HashToken(refreshToken);
 
-            user.RefreshTokenHash = HashToken(refreshToken);
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays);
+            var deviceId = string.IsNullOrWhiteSpace(login.DeviceId)
+                ? Guid.NewGuid().ToString() 
+                : login.DeviceId;
+            var existingToken = await _context.RefreshTokenInfos
+                .FirstOrDefaultAsync(rt => rt.UserId == user.Id && rt.DeviceId == deviceId);
+
+            if (existingToken != null)
+            {
+                existingToken.Token = refreshTokenHash;
+                existingToken.ExpiresAt = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays);
+                existingToken.Revoked = false;
+                existingToken.LastUsedAt = DateTime.UtcNow;
+            }
+            else
+            {
+                var refreshTokenInfo = new RefreshTokenInfo
+                {
+                    Token = refreshTokenHash,
+                    DeviceId = deviceId,
+                    ExpiresAt = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays),
+                    UserId = user.Id,
+                    LastUsedAt = DateTime.UtcNow
+                };
+                //await _context.RefreshTokenInfos.AddAsync(refreshTokenInfo);
+                await AddToDatabase(refreshTokenInfo);
+            }
 
             await _context.SaveChangesAsync();
 
             return AuthResultDto.Success("Login successful", new TokenResponseDto
             {
-                AccessToken=  accessToken,
-                RefreshToken =  refreshToken
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+                DeviceId = deviceId 
             });
         }
 
@@ -70,26 +94,52 @@ namespace Askfm_Clone.Repositories.Implementation
         {
             if (string.IsNullOrEmpty(refreshToken))
                 return AuthResultDto.Fail("Refresh token cannot be empty");
+
             var hashToken = HashToken(refreshToken);
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.RefreshTokenHash == hashToken);
-            if (user == null)
+
+            var refreshRow = await _context.RefreshTokenInfos
+                .Include(rt => rt.User) // include user so we can issue JWT
+                .FirstOrDefaultAsync(rt => rt.Token == hashToken);
+
+            if (refreshRow == null)
                 return AuthResultDto.Fail("Invalid refresh token");
 
-            if (user.RefreshTokenExpiryTime < DateTime.UtcNow)
-                return AuthResultDto.Fail("Refresh token expired");
+            if (refreshRow.Revoked || refreshRow.ExpiresAt <= DateTime.UtcNow)
+                return AuthResultDto.Fail("Refresh token expired or revoked");
 
-            var newAccessToken = GenerateJwtToken(user);
+            var user = refreshRow.User;
+            if (user == null)
+                return AuthResultDto.Fail("User not found for this refresh token");
+
             var newRefreshToken = GenerateRefreshToken();
+            var newRefreshTokenHash = HashToken(newRefreshToken);
 
-            user.RefreshTokenHash = HashToken(newRefreshToken);
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays);// 7
+            
+            refreshRow.Revoked = true;
+            refreshRow.LastUsedAt = DateTime.UtcNow;
+
+            var newRefreshRow = new RefreshTokenInfo
+            {
+                Token = newRefreshTokenHash,
+                DeviceId = refreshRow.DeviceId,
+                ExpiresAt = DateTime.UtcNow.AddDays(_config.Value.RefreshTokenLifetimeDays),
+                UserId = user.Id,
+                LastUsedAt = DateTime.UtcNow
+            };
+
+            //await _context.RefreshTokenInfos.AddAsync(newRefreshRow);
+            await AddToDatabase(newRefreshRow);
+
+        
+            var newAccessToken = GenerateJwtToken(user);
 
             await _context.SaveChangesAsync();
 
             return AuthResultDto.Success("Token refreshed successfully", new TokenResponseDto
             {
-                AccessToken=  newAccessToken,
-                RefreshToken =  newRefreshToken
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken,
+                DeviceId = refreshRow.DeviceId
             });
         }
 
@@ -138,6 +188,43 @@ namespace Askfm_Clone.Repositories.Implementation
 
             await _context.SaveChangesAsync();
             return (T)result.Entity;
+        }
+
+        public async Task<AuthResultDto> LogoutAsync(int userId, string deviceId)
+        {
+            var refreshToken = await _context.RefreshTokenInfos
+                .FirstOrDefaultAsync(rt => (rt.DeviceId == deviceId && rt.UserId == userId && !rt.Revoked));
+
+            if (refreshToken == null)
+                return AuthResultDto.Fail("No active session found for this device.");
+
+            refreshToken.Revoked = true;
+            refreshToken.LastUsedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+
+            return AuthResultDto.Success("Logged out from this device.");
+        }
+
+
+        public async Task<AuthResultDto> LogoutAllAsync(int userId)
+        {
+            var tokens = await _context.RefreshTokenInfos
+                .Where(rt => rt.UserId == userId && !rt.Revoked)
+                .ToListAsync();
+
+            if (!tokens.Any())
+                return AuthResultDto.Fail("No active sessions found.");
+
+            foreach (var token in tokens)
+            {
+                token.Revoked = true;
+                token.LastUsedAt = DateTime.UtcNow;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return AuthResultDto.Success("Logged out from all devices.");
         }
     }
 }

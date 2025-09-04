@@ -17,25 +17,25 @@ namespace Askfm_Clone.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//auto-generated
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash { get; set; }
-        public string RefreshTokenHash { get; set; }
-        public DateTime RefreshTokenExpiryTime { get; set; }
-        public bool AllowAnonymous { get; set; } = true; // AllowAnonymousQuestions and AllowAnonymousComments
-        public int Coins { get; set; } = 0;
+        public string Name { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string PasswordHash { get; set; } = null!;
+        public int Coins { get; set; }
+        public bool AllowAnonymous { get; set; }
 
-        public List<Question> QuestionsSent { get; set; }     // As sender
-        public List<Question> QuestionsReceived { get; set; } // As receiver
-        public List<Answer> Answers { get; set; }
-        public List<CoinsTransaction> CoinsTransactions { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<Like> Likes { get; set; }
+        // Navigation properties
+        public ICollection<Question> QuestionsSent { get; set; } = new List<Question>();
+        public ICollection<Question> QuestionsReceived { get; set; } = new List<Question>();
+        public ICollection<Answer> Answers { get; set; } = new List<Answer>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
+        public ICollection<Follow> Following { get; set; } = new List<Follow>();
+        public ICollection<Follow> Followers { get; set; } = new List<Follow>();
+        public ICollection<Block> BlocksMade { get; set; } = new List<Block>();
+        public ICollection<Block> BlocksReceived { get; set; } = new List<Block>();
+        public ICollection<CoinsTransaction> CoinsTransactions { get; set; } = new List<CoinsTransaction>();
 
-        public List<Follow> Following { get; set; }   // users I follow
-        public List<Follow> Followers { get; set; }   // users following me
+        public ICollection<RefreshTokenInfo> RefreshTokens { get; set; } = new List<RefreshTokenInfo>();
 
-        public List<Block> BlocksMade { get; set; }   // users I blocked
-        public List<Block> BlocksReceived { get; set; } // users that blocked me
     }
 }

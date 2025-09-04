@@ -8,5 +8,6 @@ namespace Base_Library.DTOs
 {
     public class LoginDto: AccountBaseDto
     {
+        public string? DeviceId { get; set; }
     }
 }

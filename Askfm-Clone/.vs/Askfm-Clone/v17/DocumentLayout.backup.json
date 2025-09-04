@@ -3,22 +3,6 @@
   "WorkspaceRootPath": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\accountbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\accountbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\refreshtokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\refreshtokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\repositories\\implementation\\useraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\repositories\\implementation\\useraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,24 +11,74 @@
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\repositories\\contracs\\iuseraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\logoutdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\logoutdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\logoutalldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\logoutalldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Askfmclone/True/SqlTable/dbo.RefreshTokenInfos.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\authresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\authresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\authcontrollerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\authcontrollerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Askfmclone/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\accountbasedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\accountbasedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\tokenresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\tokenresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\refreshtokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\refreshtokeninfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\migrations\\20250901201359_addrefreshtokentouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\migrations\\20250901201359_addrefreshtokentouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -59,8 +93,16 @@
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|r:\\dotnet projects\\askfm-clone\\askfm-clone\\askfm-clone\\responses\\generalresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\responses\\generalresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Askfm-Clone\\DTOs\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Askfm-Clone\\DTOs\\AccountBase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Askfm-Clone\\DTOs\\Register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,7 +112,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,122 +120,294 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\User.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\User.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\User.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:33:55.103Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AccountBase.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBase.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\AccountBase.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBase.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\AccountBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:43:27.754Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AppUser.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppUser.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\AppUser.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppUser.cs*",
-              "RelativeToolTip": "Askfm-Clone\\Data\\AppUser.cs*",
-              "ViewState": "AgIAABMAAAAAAAAAAAA6wBcAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:23:08.426Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RefreshTokenInfo.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\RefreshTokenInfo.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\RefreshTokenInfo.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\RefreshTokenInfo.cs",
-              "RelativeToolTip": "Askfm-Clone\\Data\\RefreshTokenInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T12:59:33.885Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "UserAccountRepository.cs",
               "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Repositories\\Implementation\\UserAccountRepository.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Repositories\\Implementation\\UserAccountRepository.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Repositories\\Implementation\\UserAccountRepository.cs",
-              "RelativeToolTip": "Askfm-Clone\\Repositories\\Implementation\\UserAccountRepository.cs",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAqwKAAAAAAAAAAAAAAAA==",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Repositories\\Implementation\\UserAccountRepository.cs*",
+              "RelativeToolTip": "Askfm-Clone\\Repositories\\Implementation\\UserAccountRepository.cs*",
+              "ViewState": "AgIAALsAAAAAAAAAAIAwwMkAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-31T11:47:25.408Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\AuthenticationController.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "Askfm-Clone\\Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAmwFMAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T11:23:11.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\LoginDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\LoginDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\LoginDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T09:51:55.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "dbo.RefreshTokenInfos [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Askfmclone/True/SqlTable/dbo.RefreshTokenInfos.sql",
+              "ToolTip": "dbo.RefreshTokenInfos [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-09-04T12:41:20.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LogoutDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\LogoutDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\LogoutDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\LogoutDto.cs*",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\LogoutDto.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T12:55:09.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "IUserAccountRepository.cs",
               "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Repositories\\Contracs\\IUserAccountRepository.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Repositories\\Contracs\\IUserAccountRepository.cs",
               "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Repositories\\Contracs\\IUserAccountRepository.cs",
               "RelativeToolTip": "Askfm-Clone\\Repositories\\Contracs\\IUserAccountRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-31T11:49:15.266Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Register.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Register.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Register.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Register.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Register.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAABAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "LogoutAllDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\LogoutAllDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\LogoutAllDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\LogoutAllDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\LogoutAllDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:43:47.654Z",
+              "WhenOpened": "2025-09-04T12:59:16.771Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AuthenticationController.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\AuthenticationController.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\AuthenticationController.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\AuthenticationController.cs",
-              "RelativeToolTip": "Askfm-Clone\\Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwC4AAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:23:11.387Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Program.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Program.cs",
               "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Program.cs",
               "RelativeToolTip": "Askfm-Clone\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABXAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAwwCcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:24:36.96Z"
+              "WhenOpened": "2025-08-31T11:24:36.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthResultDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AuthResultDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\AuthResultDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AuthResultDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\AuthResultDto.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T10:13:16.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\RegisterDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\RegisterDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\RegisterDto.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwBMAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T09:51:40.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "dbo.Users [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/Askfmclone/True/SqlTable/dbo.Users.sql",
+              "ToolTip": "dbo.Users [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-09-04T11:26:30.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuthControllerResponseDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AuthControllerResponseDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\AuthControllerResponseDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AuthControllerResponseDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\AuthControllerResponseDto.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAzwAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T12:04:02.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\UserDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\UserDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\UserDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\UserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T10:10:57.428Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
+              "Title": "TokenResponseDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\TokenResponseDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\TokenResponseDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\TokenResponseDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\TokenResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T10:13:04.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AccountBaseDto.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBaseDto.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\AccountBaseDto.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBaseDto.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\AccountBaseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBAAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T10:13:22.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DbSeeder.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\DbSeeder.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\DbSeeder.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\DbSeeder.cs",
+              "RelativeToolTip": "Askfm-Clone\\Data\\DbSeeder.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAlwA8AAAC4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T13:18:41.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppUser.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\AppUser.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppUser.cs",
+              "RelativeToolTip": "Askfm-Clone\\Data\\AppUser.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAA3wCMAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T11:23:08.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RefreshTokenInfo.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\RefreshTokenInfo.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\RefreshTokenInfo.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\RefreshTokenInfo.cs",
+              "RelativeToolTip": "Askfm-Clone\\Data\\RefreshTokenInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T12:59:33.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\AppDbContext.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Askfm-Clone\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAALQAAAAAAAAAAAAswL4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T12:58:58.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "20250901201359_AddRefreshTokenToUser.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Migrations\\20250901201359_AddRefreshTokenToUser.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Migrations\\20250901201359_AddRefreshTokenToUser.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Migrations\\20250901201359_AddRefreshTokenToUser.cs",
+              "RelativeToolTip": "Askfm-Clone\\Migrations\\20250901201359_AddRefreshTokenToUser.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwDUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T20:13:59.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "User.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\User.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\User.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\User.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\User.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T11:33:55.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "AccountBase.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBase.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\AccountBase.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\AccountBase.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\AccountBase.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T11:43:27.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Register.cs",
+              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Register.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Register.cs",
+              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Register.cs",
+              "RelativeToolTip": "Askfm-Clone\\DTOs\\Register.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-31T11:43:47.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "appsettings.json",
               "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\appsettings.json",
               "RelativeDocumentMoniker": "Askfm-Clone\\appsettings.json",
@@ -201,23 +415,12 @@
               "RelativeToolTip": "Askfm-Clone\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-31T12:08:23.969Z"
+              "WhenOpened": "2025-08-31T12:08:23.969Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\AppDbContext.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Askfm-Clone\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAKYAAAAAAAAAAAAowMAAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T12:58:58.791Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "JwtSection.cs",
               "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Helpers\\JwtSection.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Helpers\\JwtSection.cs",
@@ -225,23 +428,12 @@
               "RelativeToolTip": "Askfm-Clone\\Helpers\\JwtSection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T12:11:27.09Z"
+              "WhenOpened": "2025-08-31T12:11:27.09Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DbSeeder.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\DbSeeder.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\DbSeeder.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\DbSeeder.cs",
-              "RelativeToolTip": "Askfm-Clone\\Data\\DbSeeder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T13:18:41.975Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "Askfm-Clone.csproj",
               "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone.csproj",
               "RelativeDocumentMoniker": "Askfm-Clone\\Askfm-Clone.csproj",
@@ -249,19 +441,8 @@
               "RelativeToolTip": "Askfm-Clone\\Askfm-Clone.csproj",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-08-31T13:13:07.195Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "GeneralResponse.cs",
-              "DocumentMoniker": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Responses\\GeneralResponse.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Responses\\GeneralResponse.cs",
-              "ToolTip": "R:\\Dotnet Projects\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Responses\\GeneralResponse.cs",
-              "RelativeToolTip": "Askfm-Clone\\Responses\\GeneralResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-31T11:46:11.565Z"
+              "WhenOpened": "2025-08-31T13:13:07.195Z",
+              "EditorCaption": ""
             }
           ]
         }
