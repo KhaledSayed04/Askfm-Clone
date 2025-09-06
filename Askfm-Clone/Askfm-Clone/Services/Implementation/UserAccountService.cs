@@ -3,6 +3,7 @@ using Askfm_Clone.DTOs;
 using Askfm_Clone.Helpers;
 using Askfm_Clone.Repositories.Contracs;
 using Base_Library.DTOs;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,12 +15,12 @@ using UAParser;
 
 namespace Askfm_Clone.Repositories.Implementation
 {
-    public class UserAccountRepository : IUserAccountRepository
+    public class UserAccountService : IUserAccountService
     {
         private readonly AppDbContext _context;
         private readonly IOptions<JwtSection> _config;
 
-        public UserAccountRepository(IOptions<JwtSection> config, AppDbContext context)
+        public UserAccountService(IOptions<JwtSection> config, AppDbContext context)
         {
             _config = config;
             _context = context;
@@ -27,25 +28,50 @@ namespace Askfm_Clone.Repositories.Implementation
 
         public async Task<AuthResultDto> RegisterAsync(RegisterDto user)
         {
-            var emailExists = await _context.Users.AnyAsync(u => u.Email.ToLower() == user.Email!.ToLower());
+            user.Email = user.Email!.Trim().ToLower();
+            var emailExists = await _context.Users.AnyAsync(u => u.Email == user.Email);
             if (emailExists)
                 return AuthResultDto.Fail("User already exists");
 
             var newUser = new AppUser
             {
                 Name = user.Name!,
-                Email = user.Email!.ToLower(),
+                Email = user.Email!.Trim().ToLower(),
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password)
             };
 
-            await AddToDatabase(newUser);
+            try
+            {
+                await _context.Users.AddAsync(newUser);
+                await _context.SaveChangesAsync();
+                return AuthResultDto.Success("User registered successfully");
+            }
+            catch (DbUpdateException ex) when (IsUniqueConstraintViolation(ex))
+            {
+                return AuthResultDto.Fail("Email already in use.");
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handles any rare race condition case
+                return AuthResultDto.Fail("Registration failed due to concurrency conflict");
+            }
+        }
 
-            return AuthResultDto.Success("User registered successfully");
+        private bool IsUniqueConstraintViolation(DbUpdateException ex)
+        {
+            // Look for SQL Server error numbers 2627 or 2601 (unique constraint/index violations)
+            if (ex.InnerException is SqlException sqlEx &&
+                (sqlEx.Number == 2627 || sqlEx.Number == 2601))
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<AuthResultDto> LoginAsync(LoginDto login)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email!.ToLower());
+            login.Email = login.Email!.ToLower();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == login.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(login.Password, user.PasswordHash))
                 return AuthResultDto.Fail("Invalid email or password");
 
@@ -54,9 +80,10 @@ namespace Askfm_Clone.Repositories.Implementation
             var refreshTokenHash = HashToken(refreshToken);
 
             var deviceId = string.IsNullOrWhiteSpace(login.DeviceId)
-                ? Guid.NewGuid().ToString() 
+                ? Guid.NewGuid().ToString()
                 : login.DeviceId;
-            var existingToken = await _context.RefreshTokenInfos
+
+            var existingToken = await _context.RefreshTokensInfo
                 .FirstOrDefaultAsync(rt => rt.UserId == user.Id && rt.DeviceId == deviceId);
 
             if (existingToken != null)
@@ -76,17 +103,17 @@ namespace Askfm_Clone.Repositories.Implementation
                     UserId = user.Id,
                     LastUsedAt = DateTime.UtcNow
                 };
-                //await _context.RefreshTokenInfos.AddAsync(refreshTokenInfo);
-                await AddToDatabase(refreshTokenInfo);
+
+                await _context.RefreshTokensInfo.AddAsync(refreshTokenInfo);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
 
             return AuthResultDto.Success("Login successful", new TokenResponseDto
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken,
-                DeviceId = deviceId 
+                DeviceId = deviceId
             });
         }
 
@@ -97,24 +124,31 @@ namespace Askfm_Clone.Repositories.Implementation
 
             var hashToken = HashToken(refreshToken);
 
-            var refreshRow = await _context.RefreshTokenInfos
+            var refreshRow = await _context.RefreshTokensInfo
                 .Include(rt => rt.User) // include user so we can issue JWT
-                .FirstOrDefaultAsync(rt => rt.Token == hashToken);
+                .FirstOrDefaultAsync(rt => rt.Token == hashToken); // TODO: check UserId
 
             if (refreshRow == null)
                 return AuthResultDto.Fail("Invalid refresh token");
 
-            if (refreshRow.Revoked || refreshRow.ExpiresAt <= DateTime.UtcNow)
+            if(refreshRow.Revoked)
+            {
+                // Immediately revoke all tokens for this user if token reuse is detected
+                await LogoutAllAsync(refreshRow.UserId);
+                return AuthResultDto.Fail("Security violation detected");
+            }
+
+            if (refreshRow.ExpiresAt <= DateTime.UtcNow)
                 return AuthResultDto.Fail("Refresh token expired or revoked");
 
             var user = refreshRow.User;
-            if (user == null)
-                return AuthResultDto.Fail("User not found for this refresh token");
+            //if (user == null) // NOTE: Will not happen due to the cascade delete
+            //    return AuthResultDto.Fail("User not found for this refresh token");
 
             var newRefreshToken = GenerateRefreshToken();
             var newRefreshTokenHash = HashToken(newRefreshToken);
 
-            
+
             refreshRow.Revoked = true;
             refreshRow.LastUsedAt = DateTime.UtcNow;
 
@@ -127,13 +161,10 @@ namespace Askfm_Clone.Repositories.Implementation
                 LastUsedAt = DateTime.UtcNow
             };
 
-            //await _context.RefreshTokenInfos.AddAsync(newRefreshRow);
-            await AddToDatabase(newRefreshRow);
-
-        
-            var newAccessToken = GenerateJwtToken(user);
-
+            await _context.RefreshTokensInfo.AddAsync(newRefreshRow);
             await _context.SaveChangesAsync();
+
+            var newAccessToken = GenerateJwtToken(user);
 
             return AuthResultDto.Success("Token refreshed successfully", new TokenResponseDto
             {
@@ -151,6 +182,7 @@ namespace Askfm_Clone.Repositories.Implementation
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email)
             };
@@ -176,30 +208,15 @@ namespace Askfm_Clone.Repositories.Implementation
             return Convert.ToBase64String(hash);
         }
 
-
-        private async Task<T> AddToDatabase<T>(T model)
-        {
-
-            if (model is null)
-            {
-                throw new ArgumentNullException(nameof(model), "Model cannot be null.");
-            }
-            var result = await _context.AddAsync(model!);
-
-            await _context.SaveChangesAsync();
-            return (T)result.Entity;
-        }
-
         public async Task<AuthResultDto> LogoutAsync(int userId, string deviceId)
         {
-            var refreshToken = await _context.RefreshTokenInfos
+            var refreshToken = await _context.RefreshTokensInfo
                 .FirstOrDefaultAsync(rt => (rt.DeviceId == deviceId && rt.UserId == userId && !rt.Revoked));
 
             if (refreshToken == null)
-                return AuthResultDto.Fail("No active session found for this device.");
+                return AuthResultDto.Fail("Not signed in.");
 
             refreshToken.Revoked = true;
-            refreshToken.LastUsedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
 
@@ -209,22 +226,30 @@ namespace Askfm_Clone.Repositories.Implementation
 
         public async Task<AuthResultDto> LogoutAllAsync(int userId)
         {
-            var tokens = await _context.RefreshTokenInfos
+            var tokens = await _context.RefreshTokensInfo
                 .Where(rt => rt.UserId == userId && !rt.Revoked)
                 .ToListAsync();
 
             if (!tokens.Any())
-                return AuthResultDto.Fail("No active sessions found.");
+                return AuthResultDto.Fail("Not signed in.");
 
             foreach (var token in tokens)
             {
                 token.Revoked = true;
-                token.LastUsedAt = DateTime.UtcNow;
             }
 
             await _context.SaveChangesAsync();
 
             return AuthResultDto.Success("Logged out from all devices.");
+        }
+
+        public async Task CleanExpiredTokensAsync()
+        {
+            var expiredTokens = _context.RefreshTokensInfo
+                .Where(rt => rt.ExpiresAt <= DateTime.UtcNow || rt.Revoked);
+
+            _context.RefreshTokensInfo.RemoveRange(expiredTokens);
+            await _context.SaveChangesAsync();
         }
     }
 }

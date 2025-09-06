@@ -16,7 +16,7 @@ namespace Askfm_Clone.Data
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Block> Blocks { get; set; }
         public DbSet<CoinsTransaction> CoinsTransactions { get; set; }
-        public DbSet<RefreshTokenInfo> RefreshTokenInfos { get; set; }
+        public DbSet<RefreshTokenInfo> RefreshTokensInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,13 @@ namespace Askfm_Clone.Data
                 entity.Property(u => u.Name)
                       .IsRequired()
                       .HasMaxLength(50);
+
+                entity.Property(u => u.Email)
+                      .IsRequired()
+                      .HasMaxLength(100);
+
+                entity.HasIndex(u => u.Email)
+                      .IsUnique();
 
                 entity.Property(u => u.Email)
                       .IsRequired()
@@ -61,6 +68,11 @@ namespace Askfm_Clone.Data
                 entity.HasMany(u => u.CoinsTransactions)
                       .WithOne(ct => ct.Receiver)
                       .HasForeignKey(ct => ct.ReceiverId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(u => u.RefreshTokens)
+                      .WithOne(rt => rt.User)
+                      .HasForeignKey(rt => rt.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
@@ -191,16 +203,6 @@ namespace Askfm_Clone.Data
                       .HasForeignKey(b => b.BlockedId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
-            // --------------------
-            // Refresh Token
-            // --------------------
-            modelBuilder.Entity<RefreshTokenInfo>()
-          .HasOne(rt => rt.User)
-          .WithMany(u => u.RefreshTokens)
-          .HasForeignKey(rt => rt.UserId)
-          .OnDelete(DeleteBehavior.Cascade);
-        
-
         }
     }
 }

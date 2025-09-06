@@ -11,9 +11,9 @@ namespace Askfm_Clone.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IUserAccountRepository _userAccountRepository;
+        private readonly IUserAccountService _userAccountRepository;
 
-        public AuthenticationController(IUserAccountRepository userAccountRepository)
+        public AuthenticationController(IUserAccountService userAccountRepository)
         {
             _userAccountRepository = userAccountRepository;
         }
