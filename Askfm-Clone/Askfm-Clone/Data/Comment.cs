@@ -18,7 +18,7 @@ namespace Askfm_Clone.Data
         public int Id { get; set; }
         public int AnswerId { get; set; }
         public Answer Answer { get; set; }
-        public int FromUserId { get; set; }
+        public int CreatorId { get; set; }
         public AppUser Creator { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }

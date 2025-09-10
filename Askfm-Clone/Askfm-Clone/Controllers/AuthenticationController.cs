@@ -1,6 +1,5 @@
-﻿using Askfm_Clone.DTOs;
+﻿using Askfm_Clone.DTOs.Auth;
 using Askfm_Clone.Repositories.Contracs;
-using Base_Library.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

@@ -29,7 +29,7 @@ namespace Askfm_Clone.Data
                 var q1 = new Question
                 {
                     Sender = bob,
-                    Receiver = alice,
+                    //Receiver = alice,
                     Content = "What’s your favorite book?",
                     IsAnonymous = false,
                     CreatedAt = DateTime.UtcNow
@@ -38,7 +38,7 @@ namespace Askfm_Clone.Data
                 var q2 = new Question
                 {
                     Sender = alice,
-                    Receiver = bob,
+                    //Receiver = bob,
                     Content = "What’s your dream job?",
                     IsAnonymous = true,
                     CreatedAt = DateTime.UtcNow
@@ -55,7 +55,7 @@ namespace Askfm_Clone.Data
 
                 var answer = new Answer
                 {
-                    QuestionId = question.Id,
+                    //QuestionId = question.Id,
                     CreatorId = alice.Id,
                     Content = "I love reading science fiction.",
                     CreatedAt = DateTime.UtcNow
@@ -73,7 +73,7 @@ namespace Askfm_Clone.Data
                 var comment = new Comment
                 {
                     AnswerId = answer.Id,
-                    FromUserId = bob.Id,
+                    CreatorId = bob.Id,
                     Content = "Nice choice!",
                     CreatedAt = DateTime.UtcNow,
                     IsAnonymous = false

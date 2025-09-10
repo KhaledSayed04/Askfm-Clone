@@ -1,8 +1,8 @@
 ﻿using Askfm_Clone.Data;
 using Askfm_Clone.DTOs;
+using Askfm_Clone.DTOs.Auth;
 using Askfm_Clone.Helpers;
 using Askfm_Clone.Repositories.Contracs;
-using Base_Library.DTOs;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
