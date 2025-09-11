@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -8,7 +8,18 @@ namespace Askfm_Clone.Migrations
     /// <inheritdoc />
     public partial class UpdateAppUserQuestionModels : Migration
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Applies schema changes to update user/question related models: removes obsolete relationships and columns, renames and relaxes user reference on comments/questions, extends coins transaction fields, and introduces recipient tracking for questions and answers.
+        /// </summary>
+        /// <remarks>
+        /// Changes applied:
+        /// - Drops foreign keys linking Answers->Questions, Comments->Users (old), and Questions->Users (ToUser).
+        /// - Drops indexes IX_Questions_ToUserId and IX_Answers_QuestionId and removes Questions.IsBlocked and Questions.ToUserId.
+        /// - Renames Comments.FromUserId to CreatorId (and its index) and makes Questions.FromUserId nullable.
+        /// - Expands CoinsTransactions.Type to nvarchar(max) and removes the CreatedAt default SQL value.
+        /// - Adds Answers.ReceptorId and creates a new QuestionRecipients table with composite PK (QuestionId, ReceptorId) and FKs to Questions (cascade) and Users (restrict).
+        /// - Creates a unique index on Answers(QuestionId, ReceptorId), an index on QuestionRecipients.ReceptorId, and wires a composite FK from Answers(QuestionId, ReceptorId) to QuestionRecipients.
+        /// </remarks>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(

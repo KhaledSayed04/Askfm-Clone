@@ -1,4 +1,4 @@
-﻿using Askfm_Clone.DTOs;
+using Askfm_Clone.DTOs;
 using Askfm_Clone.DTOs.Likes;
 
 namespace Askfm_Clone.Services.Contracts
@@ -10,7 +10,14 @@ namespace Askfm_Clone.Services.Contracts
         /// </summary>
         /// <param name="userId">The ID of the user who is liking the answer.</param>
         /// <param name="answerId">The ID of the answer to be liked.</param>
-        /// <returns>A boolean indicating if the operation was successful. Returns false if the answer does not exist.</returns>
+        /// <summary>
+/// Adds a like from the specified user to the specified answer.
+/// </summary>
+/// <param name="userId">ID of the user who is liking the answer.</param>
+/// <param name="answerId">ID of the answer to be liked.</param>
+/// <returns>
+/// True if the like was recorded; false if the target answer does not exist or the operation did not succeed.
+/// </returns>
         Task<bool> LikeAnswerAsync(int userId, int answerId);
 
         /// <summary>
@@ -18,7 +25,14 @@ namespace Askfm_Clone.Services.Contracts
         /// </summary>
         /// <param name="userId">The ID of the user who is unliking the answer.</param>
         /// <param name="answerId">The ID of the answer to be unliked.</param>
-        /// <returns>A boolean indicating if the operation was successful. Returns false if the like did not exist.</returns>
+        /// <summary>
+/// Removes a previously added like from the specified user on the specified answer.
+/// </summary>
+/// <param name="userId">ID of the user who is removing their like.</param>
+/// <param name="answerId">ID of the answer to remove the like from.</param>
+/// <returns>
+/// True if a like was found and removed; false if no like existed for the given user and answer.
+/// </returns>
         Task<bool> UnlikeAnswerAsync(int userId, int answerId);
 
         /// <summary>
@@ -27,7 +41,12 @@ namespace Askfm_Clone.Services.Contracts
         /// </summary>
         /// <param name="likerId">The ID of the user whose likes will be removed (the one being blocked).</param>
         /// <param name="blockedId">The ID of the user who owns the answers (the one initiating the block).</param>
-        /// <returns>Task representing the asynchronous operation.</returns>
+        /// <summary>
+/// Removes all likes made by one user on every answer owned by another user.
+/// </summary>
+/// <param name="likerId">ID of the user who created the likes to remove.</param>
+/// <param name="blockedId">ID of the user whose answers should have likes removed (typically when they are blocked).</param>
+/// <returns>A task that completes when the removal operation finishes.</returns>
         Task RemoveAllLikesFromUserAsync(int likerId, int blockedId);
 
         /// <summary>
@@ -36,7 +55,13 @@ namespace Askfm_Clone.Services.Contracts
         /// <param name="answerId">The ID of the answer.</param>
         /// <param name="pageNumber">The page number for pagination.</param>
         /// <param name="pageSize">The number of items per page.</param>
-        /// <returns>A paginated response DTO containing the likers' information, or null if the answer does not exist.</returns>
+        /// <summary>
+/// Retrieves a paginated list of users who liked the specified answer.
+/// </summary>
+/// <param name="answerId">The identifier of the answer whose likers are requested.</param>
+/// <param name="pageNumber">1-based page index to return.</param>
+/// <param name="pageSize">Maximum number of likers to include in a single page.</param>
+/// <returns>A paginated response containing <see cref="LikerDto"/> entries for the requested page, or <c>null</c> if the answer does not exist.</returns>
         Task<PaginatedResponseDto<LikerDto>> GetAnswerLikersAsync(int answerId, int pageNumber, int pageSize);
     }
 }
