@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
@@ -19,6 +19,10 @@ namespace Askfm_Clone.Data
         public DbSet<RefreshTokenInfo> RefreshTokensInfo { get; set; }
         public DbSet<QuestionRecipient> QuestionRecipients { get; set; }
 
+        /// <summary>
+        /// Configures the EF Core model for the application's domain entities (tables, keys, relationships, and defaults).
+        /// </summary>
+        /// <param name="modelBuilder">The <see cref="ModelBuilder"/> used to configure entity mappings, constraints, default values, and relationships for Users, Questions, QuestionRecipients, Answers, Comments, Likes, Follows, and Blocks.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

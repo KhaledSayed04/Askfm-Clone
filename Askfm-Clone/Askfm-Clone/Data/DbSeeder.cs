@@ -1,9 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Askfm_Clone.Data
 {
     public static class DbSeeder
     {
+        /// <summary>
+        /// Ensures the database is created/migrated and populates initial domain data when each table is empty.
+        /// </summary>
+        /// <remarks>
+        /// Applies pending EF Core migrations, then conditionally seeds Users, Questions, Answers, Comments, Follows,
+        /// and CoinsTransactions only if their corresponding DbSets contain no rows. All seeded entities are persisted
+        /// immediately with SaveChanges(). Errors from migrations or saving will propagate to the caller.
+        /// </remarks>
         public static void Seed(AppDbContext context)
         {
             // Ensure database exists & migrations are applied
