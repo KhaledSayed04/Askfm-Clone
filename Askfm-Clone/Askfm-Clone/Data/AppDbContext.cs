@@ -46,7 +46,7 @@ namespace Askfm_Clone.Data
                       .OnDelete(DeleteBehavior.Restrict); // Keep received questions if user is deleted.
 
                 // Other user relationships...
-                entity.HasMany(u => u.Answers).WithOne(a => a.Creator).HasForeignKey(a => a.CreatorId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(u => u.Answers).WithOne(a => a.Creator).HasForeignKey(a => a.CreatorId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasMany(u => u.Comments).WithOne(c => c.Creator).HasForeignKey(c => c.CreatorId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasMany(u => u.Likes).WithOne(l => l.User).HasForeignKey(l => l.UserId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasMany(u => u.CoinsTransactions).WithOne(ct => ct.Receiver).HasForeignKey(ct => ct.ReceiverId).OnDelete(DeleteBehavior.Cascade);
@@ -66,14 +66,6 @@ namespace Askfm_Clone.Data
             {
                 entity.ToTable("QuestionRecipients");
                 entity.HasKey(qr => new { qr.QuestionId, qr.ReceptorId }); // Composite primary key
-
-                // --- CORRECTED ONE-TO-ONE RELATIONSHIP ---
-                // A QuestionRecipient has one Answer.
-                // An Answer has one QuestionRecipient.
-                // The foreign key is on the Answer table and is composed of two columns.
-                entity.HasOne(qr => qr.Answer)
-                      .WithOne(a => a.QuestionRecipient)
-                      .HasForeignKey<Answer>(a => new { a.QuestionId, a.ReceptorId });
             });
 
             // --- Answer Entity Configuration ---
@@ -82,7 +74,16 @@ namespace Askfm_Clone.Data
                 entity.ToTable("Answers");
                 entity.Property(a => a.Content).IsRequired();
                 entity.Property(a => a.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+
+                entity.HasOne(a => a.QuestionRecipient)
+                      .WithOne(qr => qr.Answer)
+                      .HasForeignKey<Answer>(a => new { a.QuestionId, a.ReceptorId })
+                      .OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<Answer>()
+                        .HasIndex(a => new { a.QuestionId, a.ReceptorId })
+                        .IsUnique();
 
             // --- Comment Entity Configuration ---
             modelBuilder.Entity<Comment>(entity =>
@@ -99,13 +100,16 @@ namespace Askfm_Clone.Data
             {
                 entity.ToTable("Likes");
                 entity.HasKey(l => new { l.UserId, l.AnswerId });
+                entity.Property(l => l.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
                 entity.HasOne(l => l.Answer).WithMany(a => a.Likes).HasForeignKey(l => l.AnswerId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasIndex(l => new { l.AnswerId, l.CreatedAt });
             });
 
             modelBuilder.Entity<Follow>(entity =>
             {
                 entity.ToTable("Follows");
                 entity.HasKey(f => new { f.FollowerId, f.FolloweeId });
+                entity.Property(f => f.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
                 entity.HasOne(f => f.Follower).WithMany(u => u.Following).HasForeignKey(f => f.FollowerId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(f => f.Followee).WithMany(u => u.Followers).HasForeignKey(f => f.FolloweeId).OnDelete(DeleteBehavior.Restrict);
             });
@@ -114,6 +118,7 @@ namespace Askfm_Clone.Data
             {
                 entity.ToTable("Blocks");
                 entity.HasKey(b => new { b.BlockerId, b.BlockedId });
+                entity.Property(b => b.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
                 entity.HasOne(b => b.Blocker).WithMany(u => u.BlocksMade).HasForeignKey(b => b.BlockerId).OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(b => b.Blocked).WithMany(u => u.BlocksReceived).HasForeignKey(b => b.BlockedId).OnDelete(DeleteBehavior.Restrict);
             });

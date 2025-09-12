@@ -38,7 +38,6 @@ namespace Askfm_Clone.Services.Implementation
             {
                 UserId = userId,
                 AnswerId = answerId,
-                CreatedAt = DateTime.UtcNow
             };
 
             await _appDbContext.Likes.AddAsync(like);
@@ -83,14 +82,12 @@ namespace Askfm_Clone.Services.Implementation
         public async Task<PaginatedResponseDto<LikerDto>> GetAnswerLikersAsync(int answerId, int pageNumber, int pageSize)
         {
             // First, ensure the answer exists before proceeding.
-            var answerExists = await _appDbContext.Answers.AnyAsync(a => a.Id == answerId);
+            var answerExists = await _appDbContext.Answers.AsNoTracking().AnyAsync(a => a.Id == answerId);
             if (!answerExists)
-            {
                 return null; // Signal to the controller that the resource was not found.
-            }
 
             // Build the query to find likes for the specified answer.
-            var query = _appDbContext.Likes
+            var query = _appDbContext.Likes.AsNoTracking()
                 .Where(l => l.AnswerId == answerId);
 
             // Get the total count for the pagination metadata.

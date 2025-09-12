@@ -2,6 +2,7 @@
 using Askfm_Clone.DTOs;
 using Askfm_Clone.DTOs.Answers;
 using Askfm_Clone.Services.Contracts;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -18,20 +19,29 @@ namespace Askfm_Clone.Services.Implementation
 
         public async Task<int?> AddAnswer(Answer answer, int questionId, int userId)
         {
-            var questionRecipient = await _appDbContext.QuestionRecipients.FirstOrDefaultAsync(q => q.QuestionId == questionId && q.ReceptorId == userId);
-            if (questionRecipient == null || questionRecipient.Answer != null)
-                return null; // Question not found or already answered
+            using var transaction = await _appDbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var questionRecipient = await _appDbContext.QuestionRecipients.FirstOrDefaultAsync(q => q.QuestionId == questionId && q.ReceptorId == userId);
+                if (questionRecipient == null || questionRecipient.Answer != null)
+                    return null; // Question not found or already answered
 
-            var user = await _appDbContext.Users.FindAsync(userId);
-            if (user == null) return null;
+                var user = await _appDbContext.Users.FindAsync(userId);
+                if (user == null) return null;
 
-            answer.Creator = user;
-            answer.QuestionRecipient = questionRecipient;
+                answer.Creator = user;
+                answer.QuestionRecipient = questionRecipient;
 
-            await _appDbContext.Answers.AddAsync(answer);
-            await _appDbContext.SaveChangesAsync();
-
-            return answer.Id;
+                await _appDbContext.Answers.AddAsync(answer);
+                await _appDbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return answer.Id;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                return null;
+            }
         }
 
         public async Task<bool> DeleteAnswer(int answerId)
@@ -50,12 +60,17 @@ namespace Askfm_Clone.Services.Implementation
         {
             // Base query for answers created by the specified user.
             IQueryable<Answer> query = _appDbContext.Answers
+                                                     .Include(a => a.QuestionRecipient)
+                                                     .ThenInclude(qr => qr.Question)
                                                      .Where(a => a.CreatorId == userId);
 
             // Apply ordering
             if (order == OrderAnswersChoice.Popular)
             {
-                query = query.OrderByDescending(a => a.Likes.Count()).ThenBy(a => a.CreatedAt);
+                query = query.Select(a => new { Answer = a, LikeCount = a.Likes.Count() })
+                             .OrderByDescending(x => x.LikeCount)
+                             .ThenBy(x => x.Answer.CreatedAt)
+                             .Select(x => x.Answer);
             }
             else
             {
@@ -72,9 +87,14 @@ namespace Askfm_Clone.Services.Implementation
                 .Take(pageSize)
                 .Select(a => new AnswerDetailsDto
                 {
-                    Answer = a, // For simplicity; could be mapped to a smaller Answer DTO
-                    QuestionRecipient = a.QuestionRecipient,
-                    HasComments = a.Comments.Any()
+                    AnswerId = a.Id, // For simplicity; could be mapped to a smaller Answer DTO
+                    QuestionId = a.QuestionId,
+                    RecipientId = a.ReceptorId,
+                    CreatorId = a.CreatorId,
+                    Content = a.Content,
+                    CreatedAt = a.CreatedAt,
+                    LikesCount = a.Likes.Count(),
+                    CommentsCount = a.Comments.Count(),
                 })
                 .ToListAsync();
 

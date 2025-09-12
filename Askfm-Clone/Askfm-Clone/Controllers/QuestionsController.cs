@@ -24,7 +24,15 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<QuestionRecipientDto>>> GetMyReceivedQuestions(
             [FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool answered = false)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
             var result = await _questionService.GetReceivedQuestionsAsync(userId, answered, page, pageSize);
             return Ok(result);
         }
@@ -33,12 +41,15 @@ namespace Askfm_Clone.Controllers
         [Authorize] // User must be logged in to ask a question
         public async Task<ActionResult<Question>> CreateQuestion(PostQuestionDto questionDto)
         {
-            var senderId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var senderId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var question = new Question
             {
                 Content = questionDto.Content,
-                CreatedAt = DateTime.UtcNow,
                 IsAnonymous = questionDto.IsAnonymous,
                 FromUserId = questionDto.IsAnonymous ? null : senderId
             };
@@ -50,14 +61,18 @@ namespace Askfm_Clone.Controllers
                 return BadRequest("The user you are trying to send a question to does not exist.");
             }
 
-            return CreatedAtAction(nameof(GetMyReceivedQuestions), newQuestion);
+            return Created(string.Empty, newQuestion);
         }
 
         [HttpPost("random")]
         [Authorize]
         public async Task<ActionResult<Question>> CreateRandomQuestion(PostRandomQuestionDto questionDto)
         {
-            var senderId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var senderId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var question = new Question
             {
@@ -72,7 +87,7 @@ namespace Askfm_Clone.Controllers
             return Ok(newQuestion);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id::int}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {

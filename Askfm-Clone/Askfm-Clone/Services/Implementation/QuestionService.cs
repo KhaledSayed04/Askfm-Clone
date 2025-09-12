@@ -2,7 +2,9 @@
 using Askfm_Clone.DTOs;
 using Askfm_Clone.DTOs.Questions;
 using Askfm_Clone.Services.Contracts;
+using Azure;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -50,21 +52,34 @@ namespace Askfm_Clone.Services.Implementation
 
             await _appDbContext.Questions.AddAsync(question);
 
-            var totalUserCount = await _appDbContext.Users.CountAsync();
+            var baseQuery = _appDbContext.Users.AsNoTracking();
+            if (question.FromUserId.HasValue)
+            {
+                var senderId = question.FromUserId.Value;
+                baseQuery = baseQuery
+                                    .Where(u => u.Id != senderId)
+                                    .Where(u => !_appDbContext.Blocks.Any(b =>
+                (b.BlockerId == senderId && b.BlockedId == u.Id) ||
+                (b.BlockerId == u.Id && b.BlockedId == senderId)));
+            }
+            if (question.IsAnonymous)
+            {
+                baseQuery = baseQuery.Where(u => u.AllowAnonymous);
+            }
 
+            var totalUserCount = await baseQuery.CountAsync();
             List<AppUser> targetUsers;
-
             if (totalUserCount <= numberOfRecipients)
             {
-                targetUsers = await _appDbContext.Users.ToListAsync();
+                targetUsers = await baseQuery.ToListAsync();
             }
             else
             {
-                // Efficiently select random users directly in the database.
-                targetUsers = await _appDbContext.Users
-                                                 .OrderBy(u => Guid.NewGuid())
-                                                 .Take(numberOfRecipients)
-                                                 .ToListAsync();
+                // Note: ORDER BY NEWID() is O(N). Acceptable for small samples; consider alternatives if this becomes hot.
+                targetUsers = await baseQuery
+                                    .OrderBy(u => Guid.NewGuid())
+                                    .Take(numberOfRecipients)
+                                    .ToListAsync();
             }
 
             var mappings = targetUsers.Select(user => new QuestionRecipient
@@ -99,7 +114,11 @@ namespace Askfm_Clone.Services.Implementation
 
         public async Task<PaginatedResponseDto<Question>> GetQuestions(int pageNumber = 1, int pageSize = 10, Expression<Func<Question, bool>> predicate = null)
         {
-            IQueryable<Question> query = _appDbContext.Questions.AsQueryable();
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
+            IQueryable<Question> query = _appDbContext.Questions.AsNoTracking();
 
             if (predicate != null)
             {
@@ -108,10 +127,10 @@ namespace Askfm_Clone.Services.Implementation
 
             var totalItems = await query.CountAsync();
 
-            var paginatedItems = await query.Skip((pageNumber - 1) * pageSize)
+            var paginatedItems = await query.OrderByDescending(q => q.CreatedAt)
+                                            .Skip((pageNumber - 1) * pageSize)
                                             .Take(pageSize)
                                             .ToListAsync();
-
             return new PaginatedResponseDto<Question>
             {
                 Items = paginatedItems,
@@ -123,8 +142,12 @@ namespace Askfm_Clone.Services.Implementation
 
         public async Task<PaginatedResponseDto<QuestionRecipientDto>> GetReceivedQuestionsAsync(int userId, bool hasAnswered, int pageNumber, int pageSize)
         {
-            var query = _appDbContext.QuestionRecipients
-                                     .Where(qr => qr.ReceptorId == userId && qr.AnswerId.HasValue == hasAnswered);
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
+            var query = _appDbContext.QuestionRecipients.AsNoTracking()
+                                     .Where(qr => qr.ReceptorId == userId && (hasAnswered ? qr.Answer != null : qr.Answer == null));
 
             var totalItems = await query.CountAsync();
 
@@ -136,7 +159,7 @@ namespace Askfm_Clone.Services.Implementation
                 {
                     QuestionId = qr.QuestionId,
                     Content = qr.Question.Content,
-                    SenderName = qr.Question.IsAnonymous ? null : qr.Question.Sender.Name,
+                    SenderId = qr.Question.IsAnonymous ? null : qr.Question.Sender.Id,
                     IsAnonymous = qr.Question.IsAnonymous,
                     CreatedAt = qr.Question.CreatedAt
                 })

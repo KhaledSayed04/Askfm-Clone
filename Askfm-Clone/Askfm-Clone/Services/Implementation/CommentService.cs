@@ -14,21 +14,15 @@ namespace Askfm_Clone.Services.Implementation
         }
         public async Task<int?> AddComment(Comment comment, int userId, int answerId)
         {
-            // First, ensure the answer the user is trying to comment on actually exists.
-            var answer = await _appDbContext.Answers.FirstOrDefaultAsync(ans => ans.Id == answerId);
-            if (answer == null)
-                return null; // Return null if the answer doesn't exist.
-
-            // Ensure the user who is commenting exists.
-            var user = await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            if (user == null)
-                return null; // Return null if the user doesn't exist.
-
-            // EF Core's change tracker is smart. We only need to build the relationships
-            // and add the new Comment object. EF Core handles the rest.
-            answer.Comments.Add(comment);
-            user.Comments.Add(comment);
-
+            var answerExists = await _appDbContext.Answers.AsNoTracking().AnyAsync(ans => ans.Id == answerId);
+            if (!answerExists) 
+                return null;
+            
+            var userExists = await _appDbContext.Users.AsNoTracking().AnyAsync(u => u.Id == userId);
+            if (!userExists) 
+                return null;
+            
+            // Trust the controller-set FKs; just add the comment.
             await _appDbContext.Comments.AddAsync(comment);
             await _appDbContext.SaveChangesAsync();
 

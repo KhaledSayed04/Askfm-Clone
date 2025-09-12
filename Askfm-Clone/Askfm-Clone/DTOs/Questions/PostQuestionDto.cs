@@ -6,9 +6,13 @@ namespace Askfm_Clone.DTOs.Questions
 {
     public class PostQuestionDto
     {
+        [Required]
         public int ToUserId { get; set; }
+        [Required]
+        [MinLength(1)]
+        [MaxLength(300)]
         public string Content { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public bool IsAnonymous { get; set; }
+        [Required]
+        public bool IsAnonymous { get; set; } 
     }
 }

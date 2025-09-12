@@ -12,7 +12,7 @@ namespace Askfm_Clone.DTOs.Questions
         [Required]
         [Range(1, 20, ErrorMessage = "You can send a random question to between 1 and 20 users.")]
         public int NumberOfRecipients { get; set; }
-
+        [Required]
         public bool IsAnonymous { get; set; }
     }
 }

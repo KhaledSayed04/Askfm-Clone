@@ -20,18 +20,26 @@ namespace Askfm_Clone.Controllers
             _answerService = answerService;
         }
 
-        [HttpGet("{userId}/recent")]
+        [HttpGet("{userId::int}/recent")]
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetUserRecentAnswers(
             int userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
             var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Recent);
             return Ok(result);
         }
 
-        [HttpGet("{userId}/popular")]
+        [HttpGet("{userId::int}/popular")]
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetUserPopularAnswers(
             int userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
             var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Popular);
             return Ok(result);
         }
@@ -41,7 +49,15 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetMyRecentAnswers(
             [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
             var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Recent);
             return Ok(result);
         }
@@ -51,7 +67,15 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetMyPopularAnswers(
             [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
             var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Popular);
             return Ok(result);
         }
@@ -60,12 +84,15 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<ActionResult<Answer>> PostAnswer(PostAnswerDto postAnswerDto)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var answer = new Answer
             {
                 Content = postAnswerDto.Content,
-                CreatedAt = DateTime.UtcNow,
                 CreatorId = userId
             };
 
@@ -76,16 +103,20 @@ namespace Askfm_Clone.Controllers
                 return BadRequest("Question not found, does not belong to you, or has already been answered.");
             }
 
-            // It's good practice to return the created object and a link to it.
+            answer.Id = newAnswerId.Value;
             return CreatedAtAction(nameof(GetUserRecentAnswers), new { userId = answer.CreatorId }, answer);
         }
 
 
-        [HttpDelete("{answerId}")]
+        [HttpDelete("{answerId::int}")]
         [Authorize]
         public async Task<IActionResult> DeleteAnswer(int answerId)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             // Check if the user owns the answer before allowing deletion.
             var isOwner = await _answerService.OwnAnswer(answerId, userId);

@@ -2,7 +2,7 @@
 
 namespace Askfm_Clone.DTOs.Auth
 {
-    public class LogoutDto : LogoutAllDto
+    public class LogoutDto
     {
 
         [Required]

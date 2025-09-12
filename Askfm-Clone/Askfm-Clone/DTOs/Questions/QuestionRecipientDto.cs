@@ -4,7 +4,7 @@
     {
         public int QuestionId { get; set; }
         public string Content { get; set; }
-        public string? SenderName { get; set; } // Null if anonymous
+        public int? SenderId { get; set; } // Null if anonymous
         public bool IsAnonymous { get; set; }
         public DateTime CreatedAt { get; set; }
     }

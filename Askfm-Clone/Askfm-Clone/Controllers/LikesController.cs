@@ -20,41 +20,43 @@ namespace Askfm_Clone.Controllers
             _likeService = likeService;
         }
 
-        [HttpPost("{answerId}")]
+        [HttpPost("{answerId::int}")]
         public async Task<IActionResult> LikeAnswer(int answerId)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var result = await _likeService.LikeAnswerAsync(userId, answerId);
 
-            if (!result)
-            {
-                return NotFound("The answer you are trying to like does not exist.");
-            }
-
-            return Ok();
+            return result ? NoContent() : NotFound("The answer you are trying to like does not exist.");
         }
 
-        [HttpDelete("{answerId}")]
+        [HttpDelete("{answerId::int}")]
         public async Task<IActionResult> UnlikeAnswer(int answerId)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var result = await _likeService.UnlikeAnswerAsync(userId, answerId);
 
-            if (!result)
-            {
-                return NotFound("You have not liked this answer, so you cannot unlike it.");
-            }
-
-            return NoContent(); // 204 No Content is standard for a successful DELETE.
+            return result ? NoContent() : NotFound("You have not liked this answer, so you cannot unlike it."); // 204 No Content is standard for a successful DELETE.
         }
 
-        [HttpGet("{answerId}/users")]
+        [HttpGet("{answerId::int}/users")]
         [AllowAnonymous] // It's common for likers to be publicly visible.
         public async Task<ActionResult<PaginatedResponseDto<LikerDto>>> GetLikersForAnswer(
             int answerId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
             var result = await _likeService.GetAnswerLikersAsync(answerId, page, pageSize);
 
             if (result == null)

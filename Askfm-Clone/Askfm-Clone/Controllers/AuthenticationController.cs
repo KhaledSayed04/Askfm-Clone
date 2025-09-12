@@ -1,8 +1,10 @@
 ﻿using Askfm_Clone.DTOs.Auth;
 using Askfm_Clone.Repositories.Contracs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Security.Claims;
 
 namespace Askfm_Clone.Controllers
 {
@@ -80,6 +82,7 @@ namespace Askfm_Clone.Controllers
                 (int)HttpStatusCode.OK, response.Message, response.Data));
         }
         [HttpPost("logout")]
+        [Authorize]
         public async Task<IActionResult> Logout([FromBody] LogoutDto logoutDto)
         {
             if (!ModelState.IsValid)
@@ -88,7 +91,13 @@ namespace Askfm_Clone.Controllers
                     "Invalid data",
                     ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage))));
 
-            var response = await _userAccountRepository.LogoutAsync(logoutDto.UserId , logoutDto.DeviceId);
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
+
+            var response = await _userAccountRepository.LogoutAsync(userId , logoutDto.DeviceId);
 
             if (!response.successFlag)
                 return BadRequest(AuthControllerResponseDto.ErrorResponse(
@@ -99,7 +108,8 @@ namespace Askfm_Clone.Controllers
         }
 
         [HttpPost("logout-all")]
-        public async Task<IActionResult> LogoutAll([FromBody] LogoutAllDto logoutDto)
+        [Authorize]
+        public async Task<IActionResult> LogoutAll()
         {
             if (!ModelState.IsValid)
                 return BadRequest(AuthControllerResponseDto.ErrorResponse(
@@ -107,7 +117,13 @@ namespace Askfm_Clone.Controllers
                     "Invalid data",
                     ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage))));
 
-            var response = await _userAccountRepository.LogoutAllAsync(logoutDto.UserId);
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
+
+            var response = await _userAccountRepository.LogoutAllAsync(userId);
 
             if (!response.successFlag)
                 return BadRequest(AuthControllerResponseDto.ErrorResponse(

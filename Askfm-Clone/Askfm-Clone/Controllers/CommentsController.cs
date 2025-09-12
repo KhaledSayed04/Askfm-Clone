@@ -20,10 +20,14 @@ namespace Askfm_Clone.Controllers
             _commentService = commentService;
         }
 
-        [HttpGet("{answerId}")]
+        [HttpGet("{answerId::int}")]
         public async Task<ActionResult<PaginatedResponseDto<Comment>>> GetCommentsForAnswer(
             int answerId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
+            if (page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 1000) pageSize = 100;
+
             var result = await _commentService.GetPaginatedComments(page, pageSize, answerId);
             return Ok(result);
         }
@@ -32,12 +36,15 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<ActionResult<Comment>> PostComment(PostCommentDto postCommentDto)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var comment = new Comment
             {
                 Content = postCommentDto.Content,
-                CreatedAt = DateTime.UtcNow,
                 CreatorId = userId,
                 AnswerId = postCommentDto.AnswerId
             };
@@ -49,14 +56,20 @@ namespace Askfm_Clone.Controllers
                 return BadRequest("The answer you are trying to comment on does not exist.");
             }
 
-            return CreatedAtAction(nameof(GetCommentsForAnswer), new { answerId = comment.AnswerId }, comment);
+            return CreatedAtAction(nameof(GetCommentsForAnswer),
+                                   new { answerId = comment.AnswerId },
+                                   new { id = newCommentId, comment.Content, comment.CreatedAt });
         }
 
-        [HttpDelete("{commentId}")]
+        [HttpDelete("{commentId::int}")]
         [Authorize]
         public async Task<IActionResult> DeleteComment(int commentId)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
             var isOwner = await _commentService.OwnComment(commentId, userId);
 
