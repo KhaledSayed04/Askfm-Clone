@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\services\\implementation\\questionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\services\\implementation\\questionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\services\\implementation\\likeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,62 +19,46 @@
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\services\\implementation\\answerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\services\\implementation\\useraccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\services\\implementation\\useraccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\controllers\\questionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\controllers\\questionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\questions\\postquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\questions\\postquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\questions\\questionrecipientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\questions\\questionrecipientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\controllers\\likescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\controllers\\likescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\controllers\\commentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\questions\\postrandomquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\questions\\postrandomquestiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\controllers\\answerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\controllers\\answerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\comments\\postcommentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\comments\\postcommentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\services\\contracts\\iquestionservice.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\services\\contracts\\iquestionservice.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\questions\\getquestionresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\questions\\getquestionresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\likes\\likerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\likes\\likerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\answers\\postanswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\answers\\postanswerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\dtos\\answers\\answerdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\dtos\\answers\\answerdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\data\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\data\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|c:\\users\\pc\\desktop\\askfm-clone\\askfm-clone\\askfm-clone\\askfm-clone\\data\\question.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E8F7996D-0650-4973-97D3-2D6A389E9B4B}|Askfm-Clone\\Askfm-Clone.csproj|solutionrelative:askfm-clone\\data\\question.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 462,
+      "VerticalTabListWidth": 306,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -98,211 +70,156 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\appsettings.json",
-              "RelativeDocumentMoniker": "Askfm-Clone\\appsettings.json",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\appsettings.json",
-              "RelativeToolTip": "Askfm-Clone\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-12T19:47:45.99Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UserAccountService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\UserAccountService.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Implementation\\UserAccountService.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\UserAccountService.cs",
-              "RelativeToolTip": "Askfm-Clone\\Services\\Implementation\\UserAccountService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T18:35:32.539Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Askfm-Clone\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAADwv2gAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:33:33.27Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CommentsController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\CommentsController.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\CommentsController.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\CommentsController.cs",
-              "RelativeToolTip": "Askfm-Clone\\Controllers\\CommentsController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAwwDoAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:30:52.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "QuestionRecipientDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\QuestionRecipientDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Questions\\QuestionRecipientDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\QuestionRecipientDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Questions\\QuestionRecipientDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:28:22.361Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PostRandomQuestionDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\PostRandomQuestionDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Questions\\PostRandomQuestionDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\PostRandomQuestionDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Questions\\PostRandomQuestionDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:28:10.612Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PostQuestionDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\PostQuestionDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Questions\\PostQuestionDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\PostQuestionDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Questions\\PostQuestionDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:27:02.875Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "GetQuestionResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\GetQuestionResponseDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Questions\\GetQuestionResponseDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Questions\\GetQuestionResponseDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Questions\\GetQuestionResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:26:45.694Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "LikerDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Likes\\LikerDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Likes\\LikerDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Likes\\LikerDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Likes\\LikerDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:26:35.238Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PostCommentDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Comments\\PostCommentDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Comments\\PostCommentDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Comments\\PostCommentDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Comments\\PostCommentDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:26:30.733Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "PostAnswerDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Answers\\PostAnswerDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Answers\\PostAnswerDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Answers\\PostAnswerDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Answers\\PostAnswerDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:26:22.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AnswerDetailsDto.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Answers\\AnswerDetailsDto.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\DTOs\\Answers\\AnswerDetailsDto.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\DTOs\\Answers\\AnswerDetailsDto.cs",
-              "RelativeToolTip": "Askfm-Clone\\DTOs\\Answers\\AnswerDetailsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:25:42.044Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "QuestionService.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\QuestionService.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Implementation\\QuestionService.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\QuestionService.cs",
-              "RelativeToolTip": "Askfm-Clone\\Services\\Implementation\\QuestionService.cs",
-              "ViewState": "AgIAAIsAAAAAAAAAAAAmwJkAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:25:16.759Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "LikeService.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\LikeService.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Implementation\\LikeService.cs",
               "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\LikeService.cs",
               "RelativeToolTip": "Askfm-Clone\\Services\\Implementation\\LikeService.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAQwFkAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:24:50.267Z",
+              "WhenOpened": "2025-09-13T14:58:56Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "CommentService.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\CommentService.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Implementation\\CommentService.cs",
               "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\CommentService.cs",
               "RelativeToolTip": "Askfm-Clone\\Services\\Implementation\\CommentService.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAqwBAAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:24:24.293Z",
+              "WhenOpened": "2025-09-13T14:58:45.727Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "AnswerService.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\AnswerService.cs",
               "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Implementation\\AnswerService.cs",
               "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\AnswerService.cs",
               "RelativeToolTip": "Askfm-Clone\\Services\\Implementation\\AnswerService.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAIwEMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:24:03.807Z",
+              "WhenOpened": "2025-09-13T14:58:29.94Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LikesController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\LikesController.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\LikesController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\LikesController.cs",
+              "RelativeToolTip": "Askfm-Clone\\Controllers\\LikesController.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAwwDgAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:56:42.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "QuestionsController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\QuestionsController.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\QuestionsController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\QuestionsController.cs",
+              "RelativeToolTip": "Askfm-Clone\\Controllers\\QuestionsController.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAIwCAAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:42:42.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Question.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\Question.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\Question.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\Question.cs",
+              "RelativeToolTip": "Askfm-Clone\\Data\\Question.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:38:56.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IQuestionService.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Contracts\\IQuestionService.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Contracts\\IQuestionService.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Contracts\\IQuestionService.cs",
+              "RelativeToolTip": "Askfm-Clone\\Services\\Contracts\\IQuestionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:37:53.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "QuestionService.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\QuestionService.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Services\\Implementation\\QuestionService.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Services\\Implementation\\QuestionService.cs*",
+              "RelativeToolTip": "Askfm-Clone\\Services\\Implementation\\QuestionService.cs*",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAgwMEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:36:43.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CommentsController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\CommentsController.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\CommentsController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\CommentsController.cs",
+              "RelativeToolTip": "Askfm-Clone\\Controllers\\CommentsController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:25:33.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Askfm-Clone\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAwGEAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:23:30.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AnswersController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\AnswersController.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Controllers\\AnswersController.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Controllers\\AnswersController.cs",
+              "RelativeToolTip": "Askfm-Clone\\Controllers\\AnswersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-13T14:21:40.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Program.cs",
+              "RelativeDocumentMoniker": "Askfm-Clone\\Program.cs",
+              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Program.cs",
+              "RelativeToolTip": "Askfm-Clone\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T17:22:58.486Z"
             },
             {
               "$type": "Bookmark",
@@ -323,44 +240,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Answer.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\Answer.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\Answer.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\Answer.cs",
-              "RelativeToolTip": "Askfm-Clone\\Data\\Answer.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAIA4wB0AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T20:27:28.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "DbSeeder.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\DbSeeder.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Data\\DbSeeder.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Data\\DbSeeder.cs",
-              "RelativeToolTip": "Askfm-Clone\\Data\\DbSeeder.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAgwDkAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T17:24:54.392Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Program.cs",
-              "RelativeDocumentMoniker": "Askfm-Clone\\Program.cs",
-              "ToolTip": "C:\\Users\\PC\\Desktop\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Askfm-Clone\\Program.cs",
-              "RelativeToolTip": "Askfm-Clone\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T17:22:58.486Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -5,6 +5,7 @@ using Askfm_Clone.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Askfm_Clone.Controllers
@@ -20,15 +21,11 @@ namespace Askfm_Clone.Controllers
             _commentService = commentService;
         }
 
-        [HttpGet("{answerId::int}")]
+        [HttpGet("{answerId:int}")]
         public async Task<ActionResult<PaginatedResponseDto<Comment>>> GetCommentsForAnswer(
-            int answerId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+            int answerId, [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
-            var result = await _commentService.GetPaginatedComments(page, pageSize, answerId);
+            var result = await _commentService.GetPaginatedComments(pageNumber, pageSize, answerId);
             return Ok(result);
         }
 
@@ -61,7 +58,7 @@ namespace Askfm_Clone.Controllers
                                    new { id = newCommentId, comment.Content, comment.CreatedAt });
         }
 
-        [HttpDelete("{commentId::int}")]
+        [HttpDelete("{commentId:int}")]
         [Authorize]
         public async Task<IActionResult> DeleteComment(int commentId)
         {

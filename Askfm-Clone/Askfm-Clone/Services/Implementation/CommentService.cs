@@ -21,8 +21,10 @@ namespace Askfm_Clone.Services.Implementation
             var userExists = await _appDbContext.Users.AsNoTracking().AnyAsync(u => u.Id == userId);
             if (!userExists) 
                 return null;
-            
-            // Trust the controller-set FKs; just add the comment.
+
+            // Set FKs explicitly
+            comment.AnswerId = answerId;
+            comment.CreatorId = userId;
             await _appDbContext.Comments.AddAsync(comment);
             await _appDbContext.SaveChangesAsync();
 

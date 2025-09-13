@@ -5,6 +5,7 @@ using Askfm_Clone.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Askfm_Clone.Controllers
@@ -22,18 +23,28 @@ namespace Askfm_Clone.Controllers
         [HttpGet("received")]
         [Authorize]
         public async Task<ActionResult<PaginatedResponseDto<QuestionRecipientDto>>> GetMyReceivedQuestions(
-            [FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool answered = false)
+            [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10, [FromQuery] bool answered = false)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdClaim, out var userId))
             {
                 return Unauthorized("Invalid user authentication");
             }
-            var result = await _questionService.GetReceivedQuestionsAsync(userId, answered, page, pageSize);
+            var result = await _questionService.GetReceivedQuestionsAsync(userId, answered, pageNumber, pageSize);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<PaginatedResponseDto<QuestionRecipientDto>>> GetQuestions(
+            [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10, [FromQuery] bool answered = false)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid user authentication");
+            }
+            var result = await _questionService.GetQuestionsAsync(answered, pageNumber, pageSize);
             return Ok(result);
         }
 
@@ -51,7 +62,7 @@ namespace Askfm_Clone.Controllers
             {
                 Content = questionDto.Content,
                 IsAnonymous = questionDto.IsAnonymous,
-                FromUserId = questionDto.IsAnonymous ? null : senderId
+                SenderId = questionDto.IsAnonymous ? null : senderId
             };
 
             var newQuestion = await _questionService.CreateQuestion(question, questionDto.ToUserId);
@@ -79,7 +90,7 @@ namespace Askfm_Clone.Controllers
                 Content = questionDto.Content,
                 CreatedAt = DateTime.UtcNow,
                 IsAnonymous = questionDto.IsAnonymous,
-                FromUserId = questionDto.IsAnonymous ? null : senderId
+                SenderId = questionDto.IsAnonymous ? null : senderId
             };
 
             var newQuestion = await _questionService.CreateRandomQuestion(question, questionDto.NumberOfRecipients);
@@ -87,7 +98,7 @@ namespace Askfm_Clone.Controllers
             return Ok(newQuestion);
         }
 
-        [HttpDelete("{id::int}")]
+        [HttpDelete("{id:int}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {

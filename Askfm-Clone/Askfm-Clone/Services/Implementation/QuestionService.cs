@@ -18,7 +18,7 @@ namespace Askfm_Clone.Services.Implementation
             _appDbContext = appDbContext;
         }
 
-        public async Task<Question> CreateQuestion(Question question, int targetUserId)
+        public async Task<Question?> CreateQuestion(Question question, int targetUserId)
         {
             var receptor = await _appDbContext.Users.FindAsync(targetUserId);
             if (receptor == null)
@@ -26,6 +26,21 @@ namespace Askfm_Clone.Services.Implementation
                 // Or throw a custom NotFoundException
                 return null;
             }
+
+            if (question.SenderId.HasValue)
+            {
+                var senderId = question.SenderId.Value;
+                var isBlocked = await _appDbContext.Blocks.AnyAsync(b =>
+                (b.BlockerId == senderId && b.BlockedId == receptor.Id) ||
+                (b.BlockerId == receptor.Id && b.BlockedId == senderId));
+                if (isBlocked)
+                    return null;
+            }
+            if (question.IsAnonymous && !receptor.AllowAnonymous)
+            {
+                return null;
+            }
+
 
             // Add the core question object first.
             await _appDbContext.Questions.AddAsync(question);
@@ -53,9 +68,9 @@ namespace Askfm_Clone.Services.Implementation
             await _appDbContext.Questions.AddAsync(question);
 
             var baseQuery = _appDbContext.Users.AsNoTracking();
-            if (question.FromUserId.HasValue)
+            if (question.SenderId.HasValue)
             {
-                var senderId = question.FromUserId.Value;
+                var senderId = question.SenderId.Value;
                 baseQuery = baseQuery
                                     .Where(u => u.Id != senderId)
                                     .Where(u => !_appDbContext.Blocks.Any(b =>
@@ -159,7 +174,37 @@ namespace Askfm_Clone.Services.Implementation
                 {
                     QuestionId = qr.QuestionId,
                     Content = qr.Question.Content,
-                    SenderId = qr.Question.IsAnonymous ? null : qr.Question.Sender.Id,
+                    SenderId = qr.Question.IsAnonymous ? null : qr.Question.SenderId,
+                    IsAnonymous = qr.Question.IsAnonymous,
+                    CreatedAt = qr.Question.CreatedAt
+                })
+                .ToListAsync();
+
+            return new PaginatedResponseDto<QuestionRecipientDto>
+            {
+                Items = items,
+                TotalItems = totalItems,
+                Page = pageNumber,
+                PageSize = pageSize
+            };
+        }
+
+        public async Task<PaginatedResponseDto<QuestionRecipientDto>> GetQuestionsAsync(bool hasAnswered, int pageNumber, int pageSize)
+        {
+            var query = _appDbContext.QuestionRecipients.AsNoTracking()
+                                     .Where(qr => (hasAnswered ? qr.Answer != null : qr.Answer == null));
+
+            var totalItems = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(qr => qr.Question.CreatedAt)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(qr => new QuestionRecipientDto
+                {
+                    QuestionId = qr.QuestionId,
+                    Content = qr.Question.Content,
+                    SenderId = qr.Question.IsAnonymous ? null : qr.Question.SenderId,
                     IsAnonymous = qr.Question.IsAnonymous,
                     CreatedAt = qr.Question.CreatedAt
                 })

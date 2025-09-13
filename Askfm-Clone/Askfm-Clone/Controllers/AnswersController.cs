@@ -5,6 +5,7 @@ using Askfm_Clone.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Askfm_Clone.Controllers
@@ -20,63 +21,47 @@ namespace Askfm_Clone.Controllers
             _answerService = answerService;
         }
 
-        [HttpGet("{userId::int}/recent")]
+        [HttpGet("{userId:int}/recent")]
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetUserRecentAnswers(
-            int userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+            int userId, [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
-            var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Recent);
+            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId, OrderAnswersChoice.Recent);
             return Ok(result);
         }
 
-        [HttpGet("{userId::int}/popular")]
+        [HttpGet("{userId:int}/popular")]
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetUserPopularAnswers(
-            int userId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+            int userId, [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
-            var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Popular);
+            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId, OrderAnswersChoice.Popular);
             return Ok(result);
         }
 
         [HttpGet("me/recent")]
         [Authorize]
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetMyRecentAnswers(
-            [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+            [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdClaim, out var userId))
             {
                 return Unauthorized("Invalid user authentication");
             }
-            var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Recent);
+            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId, OrderAnswersChoice.Recent);
             return Ok(result);
         }
 
         [HttpGet("me/popular")]
         [Authorize]
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetMyPopularAnswers(
-            [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+           [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdClaim, out var userId))
             {
                 return Unauthorized("Invalid user authentication");
             }
-            var result = await _answerService.GetPaginatedAnswers(page, pageSize, userId, OrderAnswersChoice.Popular);
+            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId, OrderAnswersChoice.Popular);
             return Ok(result);
         }
 
@@ -108,7 +93,7 @@ namespace Askfm_Clone.Controllers
         }
 
 
-        [HttpDelete("{answerId::int}")]
+        [HttpDelete("{answerId:int}")]
         [Authorize]
         public async Task<IActionResult> DeleteAnswer(int answerId)
         {

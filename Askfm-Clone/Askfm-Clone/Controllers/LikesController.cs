@@ -4,6 +4,7 @@ using Askfm_Clone.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace Askfm_Clone.Controllers
@@ -20,7 +21,7 @@ namespace Askfm_Clone.Controllers
             _likeService = likeService;
         }
 
-        [HttpPost("{answerId::int}")]
+        [HttpPost("{answerId:int}")]
         public async Task<IActionResult> LikeAnswer(int answerId)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -34,7 +35,7 @@ namespace Askfm_Clone.Controllers
             return result ? NoContent() : NotFound("The answer you are trying to like does not exist.");
         }
 
-        [HttpDelete("{answerId::int}")]
+        [HttpDelete("{answerId:int}")]
         public async Task<IActionResult> UnlikeAnswer(int answerId)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -48,16 +49,12 @@ namespace Askfm_Clone.Controllers
             return result ? NoContent() : NotFound("You have not liked this answer, so you cannot unlike it."); // 204 No Content is standard for a successful DELETE.
         }
 
-        [HttpGet("{answerId::int}/users")]
+        [HttpGet("{answerId:int}/users")]
         [AllowAnonymous] // It's common for likers to be publicly visible.
         public async Task<ActionResult<PaginatedResponseDto<LikerDto>>> GetLikersForAnswer(
-            int answerId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+            int answerId, [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            if (page < 1) page = 1;
-            if (pageSize < 1) pageSize = 10;
-            if (pageSize > 1000) pageSize = 100;
-
-            var result = await _likeService.GetAnswerLikersAsync(answerId, page, pageSize);
+            var result = await _likeService.GetAnswerLikersAsync(answerId, pageNumber, pageSize);
 
             if (result == null)
             {

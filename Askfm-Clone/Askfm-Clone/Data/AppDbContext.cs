@@ -36,7 +36,7 @@ namespace Askfm_Clone.Data
                 // A user can send many questions.
                 entity.HasMany(u => u.QuestionsSent)
                       .WithOne(q => q.Sender)
-                      .HasForeignKey(q => q.FromUserId)
+                      .HasForeignKey(q => q.SenderId)
                       .OnDelete(DeleteBehavior.Restrict); // A user's questions remain if their account is deleted.
 
                 // A user can receive many questions via the QuestionRecipient table.
@@ -66,6 +66,7 @@ namespace Askfm_Clone.Data
             {
                 entity.ToTable("QuestionRecipients");
                 entity.HasKey(qr => new { qr.QuestionId, qr.ReceptorId }); // Composite primary key
+                entity.HasIndex(qr => qr.ReceptorId);
             });
 
             // --- Answer Entity Configuration ---
@@ -93,6 +94,7 @@ namespace Askfm_Clone.Data
                 entity.Property(c => c.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
                 entity.HasOne(c => c.Answer).WithMany(a => a.Comments).HasForeignKey(c => c.AnswerId);
                 // Note: The FK to user is already defined in the AppUser configuration.
+                entity.HasIndex(c => new { c.AnswerId, c.CreatedAt });
             });
 
             // --- Other Configurations (Likes, Follows, Blocks) ---
