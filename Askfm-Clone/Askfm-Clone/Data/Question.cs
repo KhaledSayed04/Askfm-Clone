@@ -5,25 +5,22 @@ namespace Askfm_Clone.Data
 {
     public class Question
     {
-        /*
-            - Id (PK)
-            - FromUserId (FK->Users, nullable for anonymous)
-            - ToUserId (FK->Users)
-            - Content (text)
-            - CreatedAt
-            - IsAnonymous (bool)
-            - IsBlocked (bool)
-         */
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int FromUserId { get; set; }
-        public AppUser Sender { get; set; }
-        public int ToUserId { get; set; }
-        public AppUser Receiver { get; set; }
+
+        // A question now only knows who sent it.
+        // The recipients are handled entirely by the QuestionRecipient join table.
+        public int? SenderId { get; set; } // Nullable for truly anonymous questions
+        public AppUser? Sender { get; set; }
+
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        // This flag is now the single source of truth for anonymity.
         public bool IsAnonymous { get; set; }
-        public bool IsBlocked { get; set; }
+
+        // Navigation property to link to all the times this question has been sent.
+        public ICollection<QuestionRecipient> Recipients { get; set; } = new List<QuestionRecipient>();
     }
 }

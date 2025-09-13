@@ -3,6 +3,8 @@ using Askfm_Clone.Repositories.Contracs;
 using Askfm_Clone.Repositories.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Askfm_Clone.Helpers;
+using Askfm_Clone.Services.Contracts;
+using Askfm_Clone.Services.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Dependency Injection for Repositories
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IAnswerService, AnswerService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ILikeService, LikeService>();
 builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
 
 var app = builder.Build();

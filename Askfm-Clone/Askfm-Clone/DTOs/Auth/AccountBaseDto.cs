@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Base_Library.DTOs
+namespace Askfm_Clone.DTOs.Auth
 {
     public class AccountBaseDto
     {

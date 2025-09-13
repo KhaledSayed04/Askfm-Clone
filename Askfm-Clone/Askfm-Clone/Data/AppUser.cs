@@ -25,7 +25,7 @@ namespace Askfm_Clone.Data
 
         // Navigation properties
         public ICollection<Question> QuestionsSent { get; set; } = new List<Question>();
-        public ICollection<Question> QuestionsReceived { get; set; } = new List<Question>();
+        public ICollection<QuestionRecipient> QuestionsReceived { get; set; } = new List<QuestionRecipient>();
         public ICollection<Answer> Answers { get; set; } = new List<Answer>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
         public ICollection<Like> Likes { get; set; } = new List<Like>();

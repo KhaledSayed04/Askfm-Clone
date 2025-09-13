@@ -1,5 +1,4 @@
-﻿using Askfm_Clone.DTOs;
-using Base_Library.DTOs;
+﻿using Askfm_Clone.DTOs.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32;
 

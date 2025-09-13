@@ -4,6 +4,7 @@ using Askfm_Clone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Askfm_Clone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250910202952_Update AppUser & Question Models")]
+    partial class UpdateAppUserQuestionModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +108,7 @@ namespace Askfm_Clone.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsAnonymous")
                         .HasColumnType("bit");
@@ -191,9 +192,7 @@ namespace Askfm_Clone.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("FollowerId", "FolloweeId");
 
@@ -211,13 +210,11 @@ namespace Askfm_Clone.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UserId", "AnswerId");
 
-                    b.HasIndex("AnswerId", "CreatedAt");
+                    b.HasIndex("AnswerId");
 
                     b.ToTable("Likes", (string)null);
                 });
@@ -258,6 +255,9 @@ namespace Askfm_Clone.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ReceptorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AnswerId")
                         .HasColumnType("int");
 
                     b.HasKey("QuestionId", "ReceptorId");
@@ -307,7 +307,7 @@ namespace Askfm_Clone.Migrations
                     b.HasOne("Askfm_Clone.Data.AppUser", "Creator")
                         .WithMany("Answers")
                         .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Askfm_Clone.Data.QuestionRecipient", "QuestionRecipient")

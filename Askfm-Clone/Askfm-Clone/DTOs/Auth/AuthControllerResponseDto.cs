@@ -1,4 +1,4 @@
-﻿namespace Askfm_Clone.DTOs
+﻿namespace Askfm_Clone.DTOs.Auth
 {
     public class AuthControllerResponseDto
     {

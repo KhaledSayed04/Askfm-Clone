@@ -17,191 +17,112 @@ namespace Askfm_Clone.Data
         public DbSet<Block> Blocks { get; set; }
         public DbSet<CoinsTransaction> CoinsTransactions { get; set; }
         public DbSet<RefreshTokenInfo> RefreshTokensInfo { get; set; }
+        public DbSet<QuestionRecipient> QuestionRecipients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // --------------------
-            // User
-            // --------------------
+            // --- User Entity Configuration ---
             modelBuilder.Entity<AppUser>(entity =>
             {
                 entity.ToTable("Users");
+                entity.HasIndex(u => u.Email).IsUnique();
+                entity.Property(u => u.Name).IsRequired().HasMaxLength(50);
+                entity.Property(u => u.Email).IsRequired().HasMaxLength(100);
+                entity.Property(u => u.PasswordHash).IsRequired();
+                entity.Property(u => u.Coins).HasDefaultValue(0);
 
-                entity.Property(u => u.Name)
-                      .IsRequired()
-                      .HasMaxLength(50);
-
-                entity.Property(u => u.Email)
-                      .IsRequired()
-                      .HasMaxLength(100);
-
-                entity.HasIndex(u => u.Email)
-                      .IsUnique();
-
-                entity.Property(u => u.Email)
-                      .IsRequired()
-                      .HasMaxLength(100);
-
-                entity.Property(u => u.PasswordHash)
-                      .IsRequired();
-
-                entity.Property(u => u.Coins)
-                      .HasDefaultValue(0);
-
+                // A user can send many questions.
                 entity.HasMany(u => u.QuestionsSent)
                       .WithOne(q => q.Sender)
-                      .HasForeignKey(q => q.FromUserId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                      .HasForeignKey(q => q.SenderId)
+                      .OnDelete(DeleteBehavior.Restrict); // A user's questions remain if their account is deleted.
 
+                // A user can receive many questions via the QuestionRecipient table.
                 entity.HasMany(u => u.QuestionsReceived)
-                      .WithOne(q => q.Receiver)
-                      .HasForeignKey(q => q.ToUserId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                      .WithOne(qr => qr.Receptor)
+                      .HasForeignKey(qr => qr.ReceptorId)
+                      .OnDelete(DeleteBehavior.Restrict); // Keep received questions if user is deleted.
 
-                entity.HasMany(u => u.Answers)
-                      .WithOne(a => a.Creator)
-                      .HasForeignKey(a => a.CreatorId)
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasMany(u => u.CoinsTransactions)
-                      .WithOne(ct => ct.Receiver)
-                      .HasForeignKey(ct => ct.ReceiverId)
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasMany(u => u.RefreshTokens)
-                      .WithOne(rt => rt.User)
-                      .HasForeignKey(rt => rt.UserId)
-                      .OnDelete(DeleteBehavior.Cascade);
+                // Other user relationships...
+                entity.HasMany(u => u.Answers).WithOne(a => a.Creator).HasForeignKey(a => a.CreatorId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasMany(u => u.Comments).WithOne(c => c.Creator).HasForeignKey(c => c.CreatorId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasMany(u => u.Likes).WithOne(l => l.User).HasForeignKey(l => l.UserId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasMany(u => u.CoinsTransactions).WithOne(ct => ct.Receiver).HasForeignKey(ct => ct.ReceiverId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(u => u.RefreshTokens).WithOne(rt => rt.User).HasForeignKey(rt => rt.UserId).OnDelete(DeleteBehavior.Cascade);
             });
 
-            // --------------------
-            // Question
-            // --------------------
+            // --- Question Entity Configuration ---
             modelBuilder.Entity<Question>(entity =>
             {
                 entity.ToTable("Questions");
-
-                entity.Property(q => q.Content)
-                      .IsRequired();
-
-                entity.Property(q => q.CreatedAt)
-                      .HasDefaultValueSql("GETUTCDATE()");
+                entity.Property(q => q.Content).IsRequired();
+                entity.Property(q => q.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
             });
 
-            // --------------------
-            // Answer
-            // --------------------
+            // --- QuestionRecipient (Join Table) Configuration ---
+            modelBuilder.Entity<QuestionRecipient>(entity =>
+            {
+                entity.ToTable("QuestionRecipients");
+                entity.HasKey(qr => new { qr.QuestionId, qr.ReceptorId }); // Composite primary key
+                entity.HasIndex(qr => qr.ReceptorId);
+            });
+
+            // --- Answer Entity Configuration ---
             modelBuilder.Entity<Answer>(entity =>
             {
                 entity.ToTable("Answers");
+                entity.Property(a => a.Content).IsRequired();
+                entity.Property(a => a.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
 
-                entity.Property(a => a.Content)
-                      .IsRequired();
-
-                entity.Property(a => a.CreatedAt)
-                      .HasDefaultValueSql("GETUTCDATE()");
+                entity.HasOne(a => a.QuestionRecipient)
+                      .WithOne(qr => qr.Answer)
+                      .HasForeignKey<Answer>(a => new { a.QuestionId, a.ReceptorId })
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // --------------------
-            // CoinsTransaction
-            // --------------------
-            modelBuilder.Entity<CoinsTransaction>(entity =>
-            {
-                entity.ToTable("CoinsTransactions");
+            modelBuilder.Entity<Answer>()
+                        .HasIndex(a => new { a.QuestionId, a.ReceptorId })
+                        .IsUnique();
 
-                entity.Property(ct => ct.Amount)
-                      .IsRequired();
-
-                entity.Property(ct => ct.Type)
-                      .IsRequired()
-                      .HasMaxLength(50);
-
-                entity.Property(ct => ct.CreatedAt)
-                      .HasDefaultValueSql("GETUTCDATE()");
-            });
-            // --------------------
-            // Comment
-            // --------------------
+            // --- Comment Entity Configuration ---
             modelBuilder.Entity<Comment>(entity =>
             {
                 entity.ToTable("Comments");
-
-                entity.Property(c => c.Content)
-                      .IsRequired();
-
-                entity.Property(c => c.CreatedAt)
-                      .HasDefaultValueSql("GETUTCDATE()");
-
-                entity.HasOne(c => c.Answer)
-                      .WithMany(a => a.Comments)
-                      .HasForeignKey(c => c.AnswerId);
-
-                entity.HasOne(c => c.Creator)
-                      .WithMany(u => u.Comments)
-                      .HasForeignKey(c => c.FromUserId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                entity.Property(c => c.Content).IsRequired();
+                entity.Property(c => c.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                entity.HasOne(c => c.Answer).WithMany(a => a.Comments).HasForeignKey(c => c.AnswerId);
+                // Note: The FK to user is already defined in the AppUser configuration.
+                entity.HasIndex(c => new { c.AnswerId, c.CreatedAt });
             });
 
-            // --------------------
-            // Like
-            // --------------------
+            // --- Other Configurations (Likes, Follows, Blocks) ---
             modelBuilder.Entity<Like>(entity =>
             {
                 entity.ToTable("Likes");
-
-                entity.HasKey(l => new { l.UserId, l.AnswerId }); // composite key
-
-                entity.HasOne(l => l.Answer)
-                      .WithMany(a => a.Likes)
-                      .HasForeignKey(l => l.AnswerId)
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(l => l.User)
-                      .WithMany(u => u.Likes)
-                      .HasForeignKey(l => l.UserId)
-                      .OnDelete(DeleteBehavior.Restrict); // 👈 prevent cascade loop;
+                entity.HasKey(l => new { l.UserId, l.AnswerId });
+                entity.Property(l => l.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                entity.HasOne(l => l.Answer).WithMany(a => a.Likes).HasForeignKey(l => l.AnswerId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasIndex(l => new { l.AnswerId, l.CreatedAt });
             });
 
-            // --------------------
-            // Follow
-            // --------------------
             modelBuilder.Entity<Follow>(entity =>
             {
                 entity.ToTable("Follows");
-
                 entity.HasKey(f => new { f.FollowerId, f.FolloweeId });
-
-                entity.HasOne(f => f.Follower)
-                      .WithMany(u => u.Following)
-                      .HasForeignKey(f => f.FollowerId)
-                      .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne(f => f.Followee)
-                      .WithMany(u => u.Followers)
-                      .HasForeignKey(f => f.FolloweeId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                entity.Property(f => f.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                entity.HasOne(f => f.Follower).WithMany(u => u.Following).HasForeignKey(f => f.FollowerId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(f => f.Followee).WithMany(u => u.Followers).HasForeignKey(f => f.FolloweeId).OnDelete(DeleteBehavior.Restrict);
             });
 
-            // --------------------
-            // Block
-            // --------------------
             modelBuilder.Entity<Block>(entity =>
             {
                 entity.ToTable("Blocks");
-
                 entity.HasKey(b => new { b.BlockerId, b.BlockedId });
-
-                entity.HasOne(b => b.Blocker)
-                      .WithMany(u => u.BlocksMade)
-                      .HasForeignKey(b => b.BlockerId)
-                      .OnDelete(DeleteBehavior.Restrict);
-
-                entity.HasOne(b => b.Blocked)
-                      .WithMany(u => u.BlocksReceived)
-                      .HasForeignKey(b => b.BlockedId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                entity.Property(b => b.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+                entity.HasOne(b => b.Blocker).WithMany(u => u.BlocksMade).HasForeignKey(b => b.BlockerId).OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(b => b.Blocked).WithMany(u => u.BlocksReceived).HasForeignKey(b => b.BlockedId).OnDelete(DeleteBehavior.Restrict);
             });
         }
     }
