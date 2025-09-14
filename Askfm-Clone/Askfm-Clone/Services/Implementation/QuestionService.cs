@@ -18,7 +18,7 @@ namespace Askfm_Clone.Services.Implementation
             _appDbContext = appDbContext;
         }
 
-        public async Task<Question?> CreateQuestion(Question question, int targetUserId)
+        public async Task<int?> CreateQuestion(Question question, int targetUserId)
         {
             var receptor = await _appDbContext.Users.FindAsync(targetUserId);
             if (receptor == null)
@@ -54,16 +54,16 @@ namespace Askfm_Clone.Services.Implementation
             await _appDbContext.QuestionRecipients.AddAsync(mapping);
 
             await _appDbContext.SaveChangesAsync();
-            return question;
+            return question.Id;
         }
 
-        public async Task<Question> CreateRandomQuestion(Question question, int numberOfRecipients)
+        public async Task<int?> CreateRandomQuestion(Question question, int numberOfRecipients)
         {
             if (question == null)
-                throw new ArgumentNullException(nameof(question));
+                return null;
 
             if (numberOfRecipients <= 0)
-                throw new ArgumentException("Number of recipients must be a positive integer.", nameof(numberOfRecipients));
+                return null;
 
             await _appDbContext.Questions.AddAsync(question);
 
@@ -106,7 +106,7 @@ namespace Askfm_Clone.Services.Implementation
             await _appDbContext.QuestionRecipients.AddRangeAsync(mappings);
             await _appDbContext.SaveChangesAsync();
 
-            return question;
+            return question.Id;
         }
 
         public async Task<bool> DeleteQuestion(int questionId)

@@ -50,7 +50,7 @@ namespace Askfm_Clone.Controllers
 
         [HttpPost]
         [Authorize] // User must be logged in to ask a question
-        public async Task<ActionResult<Question>> CreateQuestion(PostQuestionDto questionDto)
+        public async Task<ActionResult<int>> CreateQuestion(PostQuestionDto questionDto)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdClaim, out var senderId))
@@ -65,19 +65,19 @@ namespace Askfm_Clone.Controllers
                 SenderId = questionDto.IsAnonymous ? null : senderId
             };
 
-            var newQuestion = await _questionService.CreateQuestion(question, questionDto.ToUserId);
+            var newQuestionId = await _questionService.CreateQuestion(question, questionDto.ToUserId);
 
-            if (newQuestion == null)
+            if (newQuestionId == null)
             {
                 return BadRequest("The user you are trying to send a question to does not exist.");
             }
 
-            return Created(string.Empty, newQuestion);
+            return Created(string.Empty, newQuestionId);
         }
 
         [HttpPost("random")]
         [Authorize]
-        public async Task<ActionResult<Question>> CreateRandomQuestion(PostRandomQuestionDto questionDto)
+        public async Task<ActionResult<int>> CreateRandomQuestion(PostRandomQuestionDto questionDto)
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdClaim, out var senderId))
@@ -88,14 +88,13 @@ namespace Askfm_Clone.Controllers
             var question = new Question
             {
                 Content = questionDto.Content,
-                CreatedAt = DateTime.UtcNow,
                 IsAnonymous = questionDto.IsAnonymous,
                 SenderId = questionDto.IsAnonymous ? null : senderId
             };
 
-            var newQuestion = await _questionService.CreateRandomQuestion(question, questionDto.NumberOfRecipients);
+            var newQuestionId = await _questionService.CreateRandomQuestion(question, questionDto.NumberOfRecipients);
 
-            return Ok(newQuestion);
+            return Created(string.Empty, newQuestionId);
         }
 
         [HttpDelete("{id:int}")]

@@ -25,8 +25,21 @@ namespace Askfm_Clone.Services.Implementation
             // Set FKs explicitly
             comment.AnswerId = answerId;
             comment.CreatorId = userId;
+            // Ensure no nav graphs are tracked accidentally
+            comment.Answer = null;
+            comment.Creator = null;
+
             await _appDbContext.Comments.AddAsync(comment);
-            await _appDbContext.SaveChangesAsync();
+
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                // Likely FK race (answer/user deleted). Surface as null to the caller.
+                return null;
+            }
 
             // Return the ID of the newly created comment.
             return comment.Id;

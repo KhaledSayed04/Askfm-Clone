@@ -50,7 +50,7 @@ namespace Askfm_Clone.Controllers
 
             if (newCommentId == null)
             {
-                return BadRequest("The answer you are trying to comment on does not exist.");
+                return NotFound("Answer not found.");
             }
 
             return CreatedAtAction(nameof(GetCommentsForAnswer),

@@ -7,8 +7,8 @@ namespace Askfm_Clone.Services.Contracts
 {
     public interface IQuestionService
     {
-        public Task<Question?> CreateQuestion(Question question, int targetUserId);
-        public Task<Question?> CreateRandomQuestion(Question question, int numberOfRecipients);
+        public Task<int?> CreateQuestion(Question question, int targetUserId);
+        public Task<int?> CreateRandomQuestion(Question question, int numberOfRecipients);
         public Task<Question?> GetQuestionById(int questionId);
         public Task<PaginatedResponseDto<Question>> GetQuestions(int pageNumber, int pageSize, Expression<Func<Question, bool>> predicate);
         public Task<PaginatedResponseDto<QuestionRecipientDto>> GetReceivedQuestionsAsync(int userId, bool hasAnswered, int pageNumber, int pageSize);
