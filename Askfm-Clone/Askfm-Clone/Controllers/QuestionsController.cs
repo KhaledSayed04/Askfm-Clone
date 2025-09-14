@@ -69,7 +69,7 @@ namespace Askfm_Clone.Controllers
 
             if (newQuestionId == null)
             {
-                return BadRequest("The user you are trying to send a question to does not exist.");
+                return NotFound("The user you are trying to send them a question do not exist or blocked you.");
             }
 
             return Created(string.Empty, newQuestionId);
