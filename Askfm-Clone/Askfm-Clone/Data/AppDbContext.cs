@@ -67,7 +67,13 @@ namespace Askfm_Clone.Data
                 entity.ToTable("QuestionRecipients");
                 entity.HasKey(qr => new { qr.QuestionId, qr.ReceptorId }); // Composite primary key
                 entity.HasIndex(qr => qr.ReceptorId);
-            });
+                // When a Question is deleted, all related QuestionRecipients will also be deleted.
+                // This ensures that associated Answers, Comments, and Likes are automatically removed
+                entity.HasOne(qr => qr.Question)
+                  .WithMany(q => q.Recipients)
+                  .HasForeignKey(qr => qr.QuestionId)
+                  .OnDelete(DeleteBehavior.Cascade);
+                    });
 
             // --- Answer Entity Configuration ---
             modelBuilder.Entity<Answer>(entity =>

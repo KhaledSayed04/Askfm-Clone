@@ -18,11 +18,14 @@ namespace Askfm_Clone.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]//auto-generated
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public string? AvatarUrl { get; set; }
         public string Email { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
         public int Coins { get; set; }
-        public bool AllowAnonymous { get; set; }
-
+        public bool AllowAnonymousQuestions { get; set; } = true;
+        public bool AllowAnonymousComments { get; set; } = true;
+        public bool IsAnonymousAccount { get; set; } = false;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         // Navigation properties
         public ICollection<Question> QuestionsSent { get; set; } = new List<Question>();
         public ICollection<QuestionRecipient> QuestionsReceived { get; set; } = new List<QuestionRecipient>();
@@ -34,7 +37,6 @@ namespace Askfm_Clone.Data
         public ICollection<Block> BlocksMade { get; set; } = new List<Block>();
         public ICollection<Block> BlocksReceived { get; set; } = new List<Block>();
         public ICollection<CoinsTransaction> CoinsTransactions { get; set; } = new List<CoinsTransaction>();
-
         public ICollection<RefreshTokenInfo> RefreshTokens { get; set; } = new List<RefreshTokenInfo>();
 
     }

@@ -13,7 +13,7 @@ namespace Askfm_Clone.Data
         // The recipients are handled entirely by the QuestionRecipient join table.
         public int? SenderId { get; set; } // Nullable for truly anonymous questions
         public AppUser? Sender { get; set; }
-
+        [Required]
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 
