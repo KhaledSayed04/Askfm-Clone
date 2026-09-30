@@ -36,7 +36,7 @@ namespace Askfm_Clone.Services.Implementation
                 if (isBlocked)
                     return null;
             }
-            if (question.IsAnonymous && !receptor.AllowAnonymous)
+            if (question.IsAnonymous && !receptor.AllowAnonymousQuestions)
             {
                 return null;
             }
@@ -79,7 +79,7 @@ namespace Askfm_Clone.Services.Implementation
             }
             if (question.IsAnonymous)
             {
-                baseQuery = baseQuery.Where(u => u.AllowAnonymous);
+                baseQuery = baseQuery.Where(u => u.AllowAnonymousQuestions);
             }
 
             var totalUserCount = await baseQuery.CountAsync();
@@ -127,7 +127,7 @@ namespace Askfm_Clone.Services.Implementation
                                       .FirstOrDefaultAsync(q => q.Id == questionId);
         }
 
-        public async Task<PaginatedResponseDto<Question>> GetQuestions(int pageNumber = 1, int pageSize = 10, Expression<Func<Question, bool>> predicate = null)
+        public async Task<PaginatedResponseDto<Question>> GetQuestions(int pageNumber = 1, int pageSize = 10, Expression<Func<Question, bool>>? predicate = null)
         {
             if (pageNumber < 1) pageNumber = 1;
             if (pageSize < 1) pageSize = 10;

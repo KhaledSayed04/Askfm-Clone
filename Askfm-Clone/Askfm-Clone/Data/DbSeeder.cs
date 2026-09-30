@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Askfm_Clone.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Askfm_Clone.Data
 {
@@ -13,9 +14,9 @@ namespace Askfm_Clone.Data
             {
                 var users = new List<AppUser>
                 {
-                    new AppUser { Name = "Alice", Email = "alice@test.com", PasswordHash = "$2a$11$dxnBHGVQL1IGXrQTe.oHUugshxG19nw/4qLg/1zpLTVJHl3nPAvz.", Coins = 100, AllowAnonymous = true }, // password: john_456
-                    new AppUser { Name = "Bob", Email = "bob@test.com", PasswordHash = "$2a$11$dxnBHGVQL1IGXrQTe.oHUugshxG19nw/4qLg/1zpLTVJHl3nPAvz.", Coins = 50, AllowAnonymous = false },
-                    new AppUser { Name = "Charlie", Email = "charlie@test.com", PasswordHash = "$2a$11$dxnBHGVQL1IGXrQTe.oHUugshxG19nw/4qLg/1zpLTVJHl3nPAvz.", Coins = 200, AllowAnonymous = true }
+                    new AppUser { Name = "Alice", Email = "alice@test.com", PasswordHash = "$2a$11$dxnBHGVQL1IGXrQTe.oHUugshxG19nw/4qLg/1zpLTVJHl3nPAvz.", Coins = 100, AllowAnonymousComments = true }, // password: john_456
+                    new AppUser { Name = "Bob", Email = "bob@test.com", PasswordHash = "$2a$11$dxnBHGVQL1IGXrQTe.oHUugshxG19nw/4qLg/1zpLTVJHl3nPAvz.", Coins = 50, AllowAnonymousComments = false },
+                    new AppUser { Name = "Charlie", Email = "charlie@test.com", PasswordHash = "$2a$11$dxnBHGVQL1IGXrQTe.oHUugshxG19nw/4qLg/1zpLTVJHl3nPAvz.", Coins = 200, AllowAnonymousComments = true }
                 };
                 context.Users.AddRange(users);
                 context.SaveChanges();
@@ -107,7 +108,7 @@ namespace Askfm_Clone.Data
                 {
                     ReceiverId = charlie.Id,
                     Amount = 50,
-                    Type = "Reward",
+                    Type = TransactionType.Reward,
                     CreatedAt = DateTime.UtcNow
                 };
 
