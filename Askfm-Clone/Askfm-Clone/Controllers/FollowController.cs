@@ -10,7 +10,7 @@ namespace Askfm_Clone.Controllers
 {
     [Route("api/users")]
     [ApiController]
-    public class FollowController : ControllerBase
+    public class FollowController : BaseController
     {
         private readonly IFollowService _followService;
 
@@ -23,10 +23,13 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<IActionResult> FollowUser(int targetUserId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized("Invalid user authentication");
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
-            var result = await _followService.FollowAsync(userId, targetUserId);
+            var result = await _followService.FollowAsync(userId.Value, targetUserId);
             return result ? NoContent() : BadRequest("Unable to follow the user.");
         }
 
@@ -34,10 +37,13 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<IActionResult> UnfollowUser(int targetUserId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized("Invalid user authentication");
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
-            var result = await _followService.UnfollowAsync(userId, targetUserId);
+            var result = await _followService.UnfollowAsync(userId.Value, targetUserId);
             return result ? NoContent() : NotFound("You are not following this user.");
         }
 

@@ -12,7 +12,7 @@ namespace Askfm_Clone.Controllers
     [Route("api/likes")]
     [ApiController]
     [Authorize] // All actions in this controller require the user to be logged in.
-    public class LikesController : ControllerBase
+    public class LikesController : BaseController
     {
         private readonly ILikeService _likeService;
 
@@ -24,13 +24,13 @@ namespace Askfm_Clone.Controllers
         [HttpPost("{answerId:int}")]
         public async Task<IActionResult> LikeAnswer(int answerId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
 
-            var result = await _likeService.LikeAnswerAsync(userId, answerId);
+            var result = await _likeService.LikeAnswerAsync(userId.Value, answerId);
 
             return result ? NoContent() : NotFound("The answer you are trying to like does not exist.");
         }
@@ -38,13 +38,13 @@ namespace Askfm_Clone.Controllers
         [HttpDelete("{answerId:int}")]
         public async Task<IActionResult> UnlikeAnswer(int answerId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
 
-            var result = await _likeService.UnlikeAnswerAsync(userId, answerId);
+            var result = await _likeService.UnlikeAnswerAsync(userId.Value, answerId);
 
             return result ? NoContent() : NotFound("You have not liked this answer, so you cannot unlike it."); // 204 No Content is standard for a successful DELETE.
         }

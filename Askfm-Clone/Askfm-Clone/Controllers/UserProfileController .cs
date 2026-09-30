@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace Askfm_Clone.Controllers
 {
-    public class UserProfileController : ControllerBase
+    public class UserProfileController : BaseController
     {
         private readonly IUserProfileService _userProfileService;
 
@@ -31,10 +31,13 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<IActionResult> UpdatePrivacySettings([FromBody] UpdatePrivacySettingsDto settings)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized();
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
-            var result = await _userProfileService.UpdatePrivacySettingsAsync(userId, settings.AllowAnonymousQuestions, settings.AllowAnonymousComments);
+            var result = await _userProfileService.UpdatePrivacySettingsAsync(userId.Value, settings.AllowAnonymousQuestions, settings.AllowAnonymousComments);
             return result ? NoContent() : BadRequest("Failed to update privacy settings.");
         }
 
@@ -42,10 +45,13 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<IActionResult> GetMyCoins()
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized();
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
-            var balance = await _userProfileService.GetCoinsBalanceAsync(userId);
+            var balance = await _userProfileService.GetCoinsBalanceAsync(userId.Value);
             return Ok(new { Balance = balance });
         }
 
@@ -53,10 +59,13 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<CoinsTransactionDto>>> GetCoinHistory([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId)) return Unauthorized();
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            {
+                return Unauthorized("Invalid user authentication");
+            }
 
-            var history = await _userProfileService.GetCoinsHistoryAsync(userId, page, pageSize);
+            var history = await _userProfileService.GetCoinsHistoryAsync(userId.Value, page, pageSize);
             return Ok(history);
         }
     }

@@ -12,7 +12,7 @@ namespace Askfm_Clone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AnswersController : ControllerBase
+    public class AnswersController : BaseController
     {
         private readonly IAnswerService _answerService;
 
@@ -42,12 +42,13 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetMyRecentAnswers(
             [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
-            {
-                return Unauthorized("Invalid user authentication");
+            var userId = GetCurrentUserId();
+            if (userId == null)
+            { 
+                return Unauthorized("Invalid user authentication"); 
             }
-            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId, OrderAnswersChoice.Recent);
+
+            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId.Value, OrderAnswersChoice.Recent);
             return Ok(result);
         }
 
@@ -56,12 +57,13 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<AnswerDetailsDto>>> GetMyPopularAnswers(
            [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
-            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId, OrderAnswersChoice.Popular);
+
+            var result = await _answerService.GetPaginatedAnswers(pageNumber, pageSize, userId.Value, OrderAnswersChoice.Popular);
             return Ok(result);
         }
 
@@ -69,8 +71,8 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<ActionResult<Answer>> PostAnswer(PostAnswerDto postAnswerDto)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
@@ -78,10 +80,10 @@ namespace Askfm_Clone.Controllers
             var answer = new Answer
             {
                 Content = postAnswerDto.Content,
-                CreatorId = userId
+                CreatorId = userId.Value
             };
 
-            var newAnswerId = await _answerService.AddAnswer(answer, postAnswerDto.QuestionId, userId);
+            var newAnswerId = await _answerService.AddAnswer(answer, postAnswerDto.QuestionId, userId.Value);
 
             if (newAnswerId == null)
             {
@@ -97,14 +99,14 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteAnswer(int answerId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
 
             // Check if the user owns the answer before allowing deletion.
-            var isOwner = await _answerService.OwnAnswer(answerId, userId);
+            var isOwner = await _answerService.OwnAnswer(answerId, userId.Value);
 
             if (!isOwner)
             {

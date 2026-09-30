@@ -6,14 +6,16 @@ namespace Askfm_Clone.Controllers
     [ApiController]
     public abstract class BaseController : ControllerBase
     {
-        protected bool IsAuthorizedFor(int targetUserId)
+        protected int? GetCurrentUserId()
         {
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (int.TryParse(userIdClaim, out var currentUserId))
-            {
-                return currentUserId == targetUserId || User.IsInRole("Admin");
-            }
-            return false;
+            return int.TryParse(userIdClaim, out var userId) ? userId : null;
+        }
+
+        protected bool IsAuthorizedFor(int targetUserId)
+        {
+            var currentUserId = GetCurrentUserId();
+            return currentUserId.HasValue && (currentUserId.Value == targetUserId || User.IsInRole("Admin"));
         }
     }
 }

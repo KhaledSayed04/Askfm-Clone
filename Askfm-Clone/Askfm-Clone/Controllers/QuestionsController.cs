@@ -12,7 +12,7 @@ namespace Askfm_Clone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : ControllerBase
+    public class QuestionsController : BaseController
     {
         private readonly IQuestionService _questionService;
         public QuestionsController(IQuestionService questionService)
@@ -25,12 +25,12 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<QuestionRecipientDto>>> GetMyReceivedQuestions(
             [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10, [FromQuery] bool answered = false)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
-            var result = await _questionService.GetReceivedQuestionsAsync(userId, answered, pageNumber, pageSize);
+            var result = await _questionService.GetReceivedQuestionsAsync(userId.Value, answered, pageNumber, pageSize);
             return Ok(result);
         }
 
@@ -39,8 +39,8 @@ namespace Askfm_Clone.Controllers
         public async Task<ActionResult<PaginatedResponseDto<QuestionRecipientDto>>> GetQuestions(
             [FromQuery, Range(1, int.MaxValue)] int pageNumber = 1, [FromQuery, Range(1, 100)] int pageSize = 10, [FromQuery] bool answered = false)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
@@ -52,8 +52,8 @@ namespace Askfm_Clone.Controllers
         [Authorize] // User must be logged in to ask a question
         public async Task<ActionResult<int>> CreateQuestion(PostQuestionDto questionDto)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var senderId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
@@ -62,7 +62,7 @@ namespace Askfm_Clone.Controllers
             {
                 Content = questionDto.Content,
                 IsAnonymous = questionDto.IsAnonymous,
-                SenderId = questionDto.IsAnonymous ? null : senderId
+                SenderId = questionDto.IsAnonymous ? null : userId
             };
 
             var newQuestionId = await _questionService.CreateQuestion(question, questionDto.ToUserId);
@@ -79,8 +79,8 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<ActionResult<int>> CreateRandomQuestion(PostRandomQuestionDto questionDto)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var senderId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
@@ -89,7 +89,7 @@ namespace Askfm_Clone.Controllers
             {
                 Content = questionDto.Content,
                 IsAnonymous = questionDto.IsAnonymous,
-                SenderId = questionDto.IsAnonymous ? null : senderId
+                SenderId = questionDto.IsAnonymous ? null : userId
             };
 
             var newQuestionId = await _questionService.CreateRandomQuestion(question, questionDto.NumberOfRecipients);

@@ -10,7 +10,7 @@ namespace Askfm_Clone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : BaseController
     {
         private readonly IUserAccountService _userAccountRepository;
 
@@ -91,13 +91,13 @@ namespace Askfm_Clone.Controllers
                     "Invalid data",
                     ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage))));
 
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
 
-            var response = await _userAccountRepository.LogoutAsync(userId , logoutDto.DeviceId);
+            var response = await _userAccountRepository.LogoutAsync(userId.Value, logoutDto.DeviceId);
 
             if (!response.successFlag)
                 return BadRequest(AuthControllerResponseDto.ErrorResponse(
@@ -117,13 +117,13 @@ namespace Askfm_Clone.Controllers
                     "Invalid data",
                     ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage))));
 
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
 
-            var response = await _userAccountRepository.LogoutAllAsync(userId);
+            var response = await _userAccountRepository.LogoutAllAsync(userId.Value);
 
             if (!response.successFlag)
                 return BadRequest(AuthControllerResponseDto.ErrorResponse(

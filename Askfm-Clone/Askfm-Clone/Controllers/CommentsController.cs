@@ -12,7 +12,7 @@ namespace Askfm_Clone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentsController : ControllerBase
+    public class CommentsController : BaseController
     {
         private readonly ICommentService _commentService;
 
@@ -33,8 +33,8 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<ActionResult<Comment>> PostComment(PostCommentDto postCommentDto)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
@@ -42,11 +42,11 @@ namespace Askfm_Clone.Controllers
             var comment = new Comment
             {
                 Content = postCommentDto.Content,
-                CreatorId = userId,
+                CreatorId = userId.Value,
                 AnswerId = postCommentDto.AnswerId
             };
 
-            var newCommentId = await _commentService.AddComment(comment, userId, postCommentDto.AnswerId);
+            var newCommentId = await _commentService.AddComment(comment, userId.Value, postCommentDto.AnswerId);
 
             if (newCommentId == null)
             {
@@ -62,13 +62,13 @@ namespace Askfm_Clone.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteComment(int commentId)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
+            var userId = GetCurrentUserId();
+            if (userId == null)
             {
                 return Unauthorized("Invalid user authentication");
             }
 
-            var isOwner = await _commentService.OwnComment(commentId, userId);
+            var isOwner = await _commentService.OwnComment(commentId, userId.Value);
 
             if (!isOwner)
             {
