@@ -73,7 +73,7 @@ namespace Askfm_Clone.Services.Implementation
                 {
                     Id = f.Follower.Id,
                     Name = f.Follower.Name,
-                    AvatarUrl = f.Follower.AvatarUrl
+                    ProfilePictureUrl = f.Follower.ProfilePictureUrl
                 })
                 .ToListAsync();
 
@@ -101,7 +101,7 @@ namespace Askfm_Clone.Services.Implementation
                 {
                     Id = f.Followee.Id,
                     Name = f.Followee.Name,
-                    AvatarUrl = f.Followee.AvatarUrl
+                    ProfilePictureUrl = f.Followee.ProfilePictureUrl
                 })
                 .ToListAsync();
 

@@ -28,11 +28,10 @@ namespace Askfm_Clone.Services.Implementation
             {
                 Id = user.Id,
                 Name = user.Name,
-                AvatarUrl = user.AvatarUrl,
+                ProfilePictureUrl = user.ProfilePictureUrl,
                 FollowersCount = user.Followers.Count,
                 FollowingCount = user.Following.Count,
-                AllowAnonymousQuestions = user.AllowAnonymousQuestions,
-                AllowAnonymousComments = user.AllowAnonymousComments
+                AllowAnonymous = user.AllowAnonymous,
             };
         }
 
@@ -46,23 +45,22 @@ namespace Askfm_Clone.Services.Implementation
             return true;
         }
 
-        public async Task<bool> UpdatePrivacySettingsAsync(int userId, bool allowAnonymousQuestions, bool allowAnonymousComments)
+        public async Task<bool> UpdatePrivacySettingsAsync(int userId, bool allowAnonymous)
         {
             var user = await _appDbContext.Users.FindAsync(userId);
             if (user == null) return false;
 
-            user.AllowAnonymousQuestions = allowAnonymousQuestions;
-            user.AllowAnonymousComments = allowAnonymousComments;
+            user.AllowAnonymous = allowAnonymous;
             await _appDbContext.SaveChangesAsync();
             return true;
         }
 
-        public async Task<bool> UpdateAvatarAsync(int userId, string avatarUrl)
+        public async Task<bool> UpdateAvatarAsync(int userId, string profilePictureUrl)
         {
             var user = await _appDbContext.Users.FindAsync(userId);
             if (user == null) return false;
 
-            user.AvatarUrl = avatarUrl;
+            user.ProfilePictureUrl = profilePictureUrl;
             await _appDbContext.SaveChangesAsync();
             return true;
         }

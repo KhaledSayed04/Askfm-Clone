@@ -36,7 +36,7 @@ namespace Askfm_Clone.Services.Implementation
                 if (isBlocked)
                     return null;
             }
-            if (question.IsAnonymous && !receptor.AllowAnonymousQuestions)
+            if (question.IsAnonymous && !receptor.AllowAnonymous)
             {
                 return null;
             }
@@ -79,7 +79,7 @@ namespace Askfm_Clone.Services.Implementation
             }
             if (question.IsAnonymous)
             {
-                baseQuery = baseQuery.Where(u => u.AllowAnonymousQuestions);
+                baseQuery = baseQuery.Where(u => u.AllowAnonymous);
             }
 
             var totalUserCount = await baseQuery.CountAsync();

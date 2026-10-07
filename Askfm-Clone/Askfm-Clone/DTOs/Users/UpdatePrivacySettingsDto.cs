@@ -2,7 +2,6 @@
 {
     public class UpdatePrivacySettingsDto
     {
-        public bool AllowAnonymousQuestions { get; set; }
-        public bool AllowAnonymousComments { get; set; }
+        public bool AllowAnonymous { get; set; }
     }
 }

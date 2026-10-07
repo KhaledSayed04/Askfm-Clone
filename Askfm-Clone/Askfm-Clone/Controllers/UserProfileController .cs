@@ -37,7 +37,7 @@ namespace Askfm_Clone.Controllers
                 return Unauthorized("Invalid user authentication");
             }
 
-            var result = await _userProfileService.UpdatePrivacySettingsAsync(userId.Value, settings.AllowAnonymousQuestions, settings.AllowAnonymousComments);
+            var result = await _userProfileService.UpdatePrivacySettingsAsync(userId.Value, settings.AllowAnonymous);
             return result ? NoContent() : BadRequest("Failed to update privacy settings.");
         }
 

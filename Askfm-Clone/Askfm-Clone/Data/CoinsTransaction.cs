@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Askfm_Clone.Enums;
 
 namespace Askfm_Clone.Data
 {
@@ -18,7 +19,7 @@ namespace Askfm_Clone.Data
         public int ReceiverId { get; set; }
         public AppUser Receiver { get; set; }
         public int Amount { get; set; }
-        public string Type { get; set; } // Reward - Purchase - Gift - AdminAdjustment
+        public TransactionType Type { get; set; } // Reward - Purchase - Gift - AdminAdjustment
         public DateTime CreatedAt { get; set; }
     }
 }
