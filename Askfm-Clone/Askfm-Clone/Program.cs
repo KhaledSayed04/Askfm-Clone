@@ -1,10 +1,13 @@
 using Askfm_Clone.Data;
+using Askfm_Clone.Helpers;
 using Askfm_Clone.Repositories.Contracs;
 using Askfm_Clone.Repositories.Implementation;
-using Microsoft.EntityFrameworkCore;
-using Askfm_Clone.Helpers;
 using Askfm_Clone.Services.Contracts;
 using Askfm_Clone.Services.Implementation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +27,30 @@ builder.Services.AddScoped<IQuestionService, QuestionService>();
 builder.Services.AddScoped<IAnswerService, AnswerService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ILikeService, LikeService>();
+builder.Services.AddScoped<IBlockService, BlockService>();
+builder.Services.AddScoped<IFollowService, FollowService>();
 builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
+
+// Configure JWT Authentication Middleware
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JwtSection:Issuer"],
+        ValidAudience = builder.Configuration["JwtSection:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSection:Key"]))
+    };
+});
+
 
 var app = builder.Build();
 
@@ -41,6 +67,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

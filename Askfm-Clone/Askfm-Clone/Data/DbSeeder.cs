@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Askfm_Clone.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace Askfm_Clone.Data
 {
@@ -107,7 +108,7 @@ namespace Askfm_Clone.Data
                 {
                     ReceiverId = charlie.Id,
                     Amount = 50,
-                    Type = "Reward",
+                    Type = TransactionType.Reward,
                     CreatedAt = DateTime.UtcNow
                 };
 

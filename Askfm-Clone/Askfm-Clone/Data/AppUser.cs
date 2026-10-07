@@ -10,8 +10,8 @@ namespace Askfm_Clone.Data
             - Username
             - Email
             - PasswordHash
-            - AvatarUrl
-            - Settings (e.g., AllowAnonymousQuestions, AllowAnonymousComments)
+            - Settings (e.g., AllowAnonymous)
+            - ProfilePictureUrl
             - CreatedAt
          */
         [Key]
@@ -22,6 +22,7 @@ namespace Askfm_Clone.Data
         public string PasswordHash { get; set; } = null!;
         public int Coins { get; set; }
         public bool AllowAnonymous { get; set; }
+        public string? ProfilePictureUrl { get; set; }
 
         // Navigation properties
         public ICollection<Question> QuestionsSent { get; set; } = new List<Question>();
@@ -36,6 +37,5 @@ namespace Askfm_Clone.Data
         public ICollection<CoinsTransaction> CoinsTransactions { get; set; } = new List<CoinsTransaction>();
 
         public ICollection<RefreshTokenInfo> RefreshTokens { get; set; } = new List<RefreshTokenInfo>();
-
     }
 }
