@@ -29,34 +29,43 @@ namespace Askfm_Clone.Data
 
                 var q1 = new Question
                 {
-                    Sender = bob,
-                    //Receiver = alice,
-                    Content = "What’s your favorite book?",
+                    SenderId = bob.Id,
+                    Content = "What's your favorite book?",
                     IsAnonymous = false,
                     CreatedAt = DateTime.UtcNow
                 };
 
                 var q2 = new Question
                 {
-                    Sender = alice,
-                    //Receiver = bob,
-                    Content = "What’s your dream job?",
+                    SenderId = alice.Id,
+                    Content = "What's your dream job?",
                     IsAnonymous = true,
                     CreatedAt = DateTime.UtcNow
                 };
 
                 context.Questions.AddRange(q1, q2);
                 context.SaveChanges();
+
+                // Link each question to its recipient via the join table.
+                context.QuestionRecipients.AddRange(
+                    new QuestionRecipient { QuestionId = q1.Id, ReceptorId = alice.Id },
+                    new QuestionRecipient { QuestionId = q2.Id, ReceptorId = bob.Id }
+                );
+                context.SaveChanges();
             }
 
             if (!context.Answers.Any())
             {
-                var question = context.Questions.First();
                 var alice = context.Users.First(u => u.Name == "Alice");
+                var q1 = context.Questions.First();
+
+                var qr = context.QuestionRecipients
+                    .First(r => r.QuestionId == q1.Id && r.ReceptorId == alice.Id);
 
                 var answer = new Answer
                 {
-                    //QuestionId = question.Id,
+                    QuestionId = qr.QuestionId,
+                    ReceptorId = qr.ReceptorId,
                     CreatorId = alice.Id,
                     Content = "I love reading science fiction.",
                     CreatedAt = DateTime.UtcNow
