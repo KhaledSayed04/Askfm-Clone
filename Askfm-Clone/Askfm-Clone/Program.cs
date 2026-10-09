@@ -20,7 +20,32 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header. Example: 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 // Dependency Injection for Repositories
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
@@ -29,6 +54,7 @@ builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ILikeService, LikeService>();
 builder.Services.AddScoped<IBlockService, BlockService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
+builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.Configure<JwtSection>(builder.Configuration.GetSection("JwtSection"));
 
 // Configure JWT Authentication Middleware
