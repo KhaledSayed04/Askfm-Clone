@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Askfm_Clone</RootNamespace>
+    <UserSecretsId>52ce469b-8430-46c5-bf5a-711506925ecb</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
